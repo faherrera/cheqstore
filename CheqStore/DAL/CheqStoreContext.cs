@@ -19,6 +19,6 @@ namespace CheqStore.DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-
+        public System.Data.Entity.DbSet<CheqStore.Models.Product> Products { get; set; }
     }
 }

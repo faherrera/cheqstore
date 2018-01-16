@@ -1,0 +1,42 @@
+﻿@model CheqStore.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
+}
+
+<h2>Detalle de los productos</h2>
+
+
+
+        <div class="card ">
+            <div class="card-image">
+                <img src="https://cdn.imageserver.rapidcore.com.ar/api/file/713040b2dd41c9f415e4f6fb81940849807a141a.jpg?&h=1500&w=1500&ft=Most_Expanded&rt=Horizontal">
+            </div>
+            <div class="card-content">
+                <span class="card-title">@Model.Name</span>
+
+                <ul class="collection">
+                    <li class="collection-item valign-wrapper">
+                        <p>
+                            @Model.Description
+                        </p>
+
+                    </li>
+                    <li class="collection-item valign-wrapper"><i class="material-icons">monetization_on</i> <strong> Precio :  $ @Model.Price</strong></li>
+                    <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria :  @Model.CategoryID</strong></li>
+                </ul>
+            </div>
+            <div class="card-action right-align">
+                <a href="#!" class="btn-large waves-effect waves-light" >
+                    Agregar a carrito
+                    <i class="material-icons right">add_shopping_cart</i>
+                </a>
+            </div>
+        </div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
