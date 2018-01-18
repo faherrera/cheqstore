@@ -15,8 +15,10 @@ namespace CheqStore.Models
         public string Email { get; set; }
         public string Password { get; set; }
         public string PathPhoto { get; set; }
-        public int? RolID { get; set; } //Tipo de rol, será relacionada en el futuro.
         public DateTime CreatedAt { get; set; }
+
+        public int RolID { get; set; } //Tipo de rol, será relacionada en el futuro.
+        public virtual Rol Rol { get; set; } //Relacionando con Rol.
 
     }
 }

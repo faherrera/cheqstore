@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -15,7 +16,11 @@ namespace CheqStore.Models
         public decimal Price { get; set; }
         public int? Stock { get; set; }
         public string PathPhoto { get; set; }
-        public int CategoryID { get; set; } //FK. Relacionada con Categories.
         public Nullable<DateTime> CreatedAt { get; set; }
+
+        [ForeignKey("Category")]
+        public int? CategoryID { get; set; } //FK. Relacionada con Categories.
+
+        public virtual Category Category { get; set; }
     }
 }

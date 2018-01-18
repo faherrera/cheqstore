@@ -156,6 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="DAL\CheqStoreContext.cs" />
     <Compile Include="Data\ModelNotMapped\BaseEntity\BaseEntity.cs" />
     <Compile Include="Data\ModelNotMapped\Repositories\ResponseRequest.cs" />
+    <Compile Include="Data\Repositories\Miscellanious\MultimediaRepository.cs" />
     <Compile Include="Data\Repositories\Products\RepositoryProduct.cs" />
     <Compile Include="Data\Repositories\Products\ValidationProduct.cs" />
     <Compile Include="Global.asax.cs">
@@ -177,6 +179,9 @@
       <DependentUpon>201801160132470_firstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\User.cs" />
@@ -185,6 +190,7 @@
   <ItemGroup>
     <Content Include="Assets\css\layouts\general.css" />
     <Content Include="Assets\css\base.css" />
+    <Content Include="Assets\css\material-icons.css" />
     <Content Include="Assets\css\styles.css" />
     <Content Include="Assets\css\materialize.min.css" />
     <Content Include="Assets\js\master.js" />
@@ -211,6 +217,9 @@
     <Content Include="Assets\fonts\Roboto-Regular.woff2" />
     <Content Include="Assets\fonts\Roboto-Thin.woff" />
     <Content Include="Assets\fonts\Roboto-Thin.woff2" />
+    <Content Include="Assets\fonts\MaterialIcons-Regular.ttf" />
+    <Content Include="Assets\fonts\MaterialIcons-Regular.woff" />
+    <Content Include="Assets\fonts\MaterialIcons-Regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -253,6 +262,11 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,5 @@
-﻿console.log("Este es el Master");
+﻿console.log("Está ejecutandose el master");
 
 $(document).ready(function () {
 
-    alert("Estoy funcionando como Jquery");
 });

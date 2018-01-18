@@ -7,11 +7,13 @@ using System.Web;
 
 namespace CheqStore.Models
 {
-    public class Rol : BaseEntity
+    public class Category
     {
-     
+        [Key]
+        public int CategoryID { get; set; }
         public string Name { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public ICollection<User> Users { get; set; }
+        public ICollection<Product> Products { get; set; } 
     }
 }

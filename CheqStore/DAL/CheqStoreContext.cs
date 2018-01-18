@@ -21,5 +21,6 @@ namespace CheqStore.DAL
         }
 
         public System.Data.Entity.DbSet<CheqStore.Models.Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
