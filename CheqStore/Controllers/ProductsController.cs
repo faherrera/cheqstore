@@ -47,7 +47,7 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,Name,Description,Price,Stock,PathPhoto,CategoryID,CreatedAt,UpdateAt")] Product product)
+        public ActionResult Create( Product product)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,Name,Description,Price,Stock,PathPhoto,CategoryID,CreatedAt,UpdateAt")] Product product)
+        public ActionResult Edit( Product product)
         {
             if (ModelState.IsValid)
             {

@@ -1,0 +1,27 @@
+﻿@model CheqStore.Models.Rol
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
+}
+
+<h2>Editar el Rol</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.RolID)
+
+    <div class="row">
+        <div class="input-field col s12">
+            @*@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Ejemplo:admin", @class = "validate", @id = "inputRolName", @type = "text" } })*@
+            @Html.EditorFor(model=> model.Name,new { @class = "red"})
+            <label for="first_name">Nombre del Rol</label>
+        </div>
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+            Crear
+            <i class="material-icons right">send</i>
+        </button>
+
+    </div>
+}

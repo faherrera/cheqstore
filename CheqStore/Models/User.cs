@@ -17,7 +17,6 @@ namespace CheqStore.Models
         public string PathPhoto { get; set; }
         public int? RolID { get; set; } //Tipo de rol, será relacionada en el futuro.
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdateAt { get; set; }
 
     }
 }

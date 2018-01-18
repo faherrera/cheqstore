@@ -16,7 +16,6 @@ namespace CheqStore.Models
         public int? Stock { get; set; }
         public string PathPhoto { get; set; }
         public int CategoryID { get; set; } //FK. Relacionada con Categories.
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public Nullable<DateTime> CreatedAt { get; set; }
     }
 }
