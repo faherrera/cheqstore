@@ -15,9 +15,17 @@
     <section class="menu-categories col s12 m3">
         <ul class="collection with-header">
             <li class="collection-header"><h4>Categorias</h4></li>
-            <li class="collection-item"><div>Ropa<a href="#!" class="secondary-content"><i class="material-icons">forward</i></a></div></li>
-            <li class="collection-item"><div>Deportes<a href="#!" class="secondary-content"><i class="material-icons">forward</i></a></div></li>
-            <li class="collection-item"><div>Electronica<a href="#!" class="secondary-content"><i class="material-icons">forward</i></a></div></li>
+            
+            @if (ViewBag.Categories != null)
+            {
+
+                foreach (var item in ViewBag.Categories)
+                {
+                    @*<li class="collection-item"> @Html.ActionLink(@item.Name,"Detail","Categories",new { id = @item.CategoryID })</li>*@
+                    <li class="collection-item" style="display:flex"> <a href="./?category=@item.CategoryID" class="secondary-content" style="display:flex" >@item.Name<i class="material-icons">forward</i></a></li>
+                }
+            }
+
         </ul>
     </section>
 
@@ -25,11 +33,14 @@
         <div class="row">
             @foreach (var item in Model)
             {
+
+                string image = (string.IsNullOrEmpty(item.PathPhoto)) ? "http://www.bitaccora.com/images/portal/web/imagenblanco.jpg" : "/Uploads/" + item.PathPhoto;
+                
                 <div class="col s12 m4 ">
                     <div class="card hoverable">
 
-                        <div class="card-image">
-                            <img src="http://materializecss.com/images/sample-1.jpg">
+                        <div class="card-image product-card__image--list">
+                            <img src=@image >
                             <a class="btn-floating pulse halfway-fab waves-effect waves-light  teal darken-2 "><i class="material-icons">add_shopping_cart</i></a>
                         </div>
 

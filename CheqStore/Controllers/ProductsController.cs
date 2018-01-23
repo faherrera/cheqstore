@@ -19,6 +19,8 @@ namespace CheqStore.Controllers
         // GET: Products
         public ActionResult Index()
         {
+            ViewBag.Categories = db.Categories.ToList();
+
             return View(db.Products.ToList());
         }
 
@@ -40,6 +42,7 @@ namespace CheqStore.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryID = new SelectList(db.Categories,"CategoryID","Name");
             return View();
         }
 
@@ -48,11 +51,11 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Product product)
+        public ActionResult Create( Product product, HttpPostedFileBase File)
         {
             if (ModelState.IsValid)
             {
-                RepositoryProduct.StoreProduct(product);
+                RepositoryProduct.StoreProduct(product,File);
 
                 return RedirectToAction("Index");
             }
@@ -68,6 +71,9 @@ namespace CheqStore.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Product product = db.Products.Find(id);
+
+            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name",product.ProductID);
+
             if (product == null)
             {
                 return HttpNotFound();
@@ -80,11 +86,11 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Product product)
+        public ActionResult Edit( Product product,HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                RepositoryProduct.UpdateProduct(product);
+                RepositoryProduct.UpdateProduct(product,file);
 
                 return RedirectToAction("Index");
             }

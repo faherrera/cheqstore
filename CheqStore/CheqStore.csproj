@@ -156,6 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -163,7 +164,9 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\CheqStoreContext.cs" />
     <Compile Include="Data\ModelNotMapped\BaseEntity\BaseEntity.cs" />
+    <Compile Include="Data\ModelNotMapped\Categories\CategoryAutocomplete.cs" />
     <Compile Include="Data\ModelNotMapped\Repositories\ResponseRequest.cs" />
+    <Compile Include="Data\Repositories\Categories\RepositoryCategories.cs" />
     <Compile Include="Data\Repositories\Miscellanious\MultimediaRepository.cs" />
     <Compile Include="Data\Repositories\Products\RepositoryProduct.cs" />
     <Compile Include="Data\Repositories\Products\ValidationProduct.cs" />
@@ -194,6 +197,7 @@
     <Content Include="Assets\css\styles.css" />
     <Content Include="Assets\css\materialize.min.css" />
     <Content Include="Assets\js\master.js" />
+    <Content Include="Assets\js\Product\ProductBase.js" />
     <Content Include="Assets\js\templates\general.js" />
     <Content Include="Assets\js\materialize.min.js" />
     <Content Include="Content\bootstrap.css" />
@@ -272,6 +276,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Data\Repositories\Roles\" />
     <Folder Include="Data\Repositories\Users\" />
+    <Folder Include="Uploads\" />
+    <Folder Include="Views\ApiAutocomplete\" />
     <Folder Include="Views\Shared\Layouts\Admin\" />
   </ItemGroup>
   <ItemGroup>

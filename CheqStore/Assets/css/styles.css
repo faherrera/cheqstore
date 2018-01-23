@@ -1,1 +1,14 @@
-﻿
+﻿/*
+    ##Products
+*/
+
+
+.product-card__image--list img{
+    height: 200px;
+    object-fit:contain;
+}
+
+.product-card__image--detail img{
+    max-height: 500px;
+    object-fit: contain;
+}
