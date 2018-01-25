@@ -1,0 +1,22 @@
+﻿main {
+    background: #d1ccc0;
+    background: url('../../img/open.jpg')no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.square-form{
+    padding: 1rem;
+}
+
+
+
+.square-form__button{
+    width: 100%;
+}

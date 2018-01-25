@@ -9,37 +9,17 @@
     <link href="~/Assets/css/material-icons.css" rel="stylesheet" />
     <link href="~/Assets/css/materialize.min.css" rel="stylesheet" />
     <link href="~/Assets/css/base.css" rel="stylesheet" />
-    <link href="~/Assets/css/styles.css" rel="stylesheet" />
-    <link href="~/Assets/css/layouts/general.css" rel="stylesheet" />
+    <link href="~/Assets/css/layouts/nonav.css" rel="stylesheet" />
+
 </head>
 <body>
-
-
-
-    <nav class="blue-grey lighten-1">
-        <div class="nav-wrapper container">
-            <a href="#!" class="brand-logo ">CheqStore</a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            
-            @Html.Partial("~/Views/Shared/Layouts/General/Partials/Nav/Nav.cshtml")
-
-        </div>
-    </nav>
-
-
-    <main class="container">
-        @RenderBody()
-
+    <main>
+        @RenderBody();
     </main>
-
-    @*<footer class="container">
-        <p>&copy; @DateTime.Now.Year - Facundo Herrera</p>
-    </footer>*@
 
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Assets/js/materialize.min.js"></script>
     <script src="~/Assets/js/master.js"></script>
-    <script src="~/Assets/js/templates/general.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

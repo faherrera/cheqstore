@@ -159,17 +159,26 @@
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\CheqStoreContext.cs" />
     <Compile Include="Data\ModelNotMapped\BaseEntity\BaseEntity.cs" />
+    <Compile Include="Data\ModelNotMapped\BaseEntity\ResponseEntity.cs" />
     <Compile Include="Data\ModelNotMapped\Categories\CategoryAutocomplete.cs" />
+    <Compile Include="Data\ModelNotMapped\Login\LoginClass.cs" />
+    <Compile Include="Data\ModelNotMapped\Register\RegisterRequest.cs" />
     <Compile Include="Data\ModelNotMapped\Repositories\ResponseRequest.cs" />
+    <Compile Include="Data\Repositories\Auth\CredentialsRepository.cs" />
     <Compile Include="Data\Repositories\Categories\RepositoryCategories.cs" />
+    <Compile Include="Data\Repositories\Login\RepositoryLogin.cs" />
     <Compile Include="Data\Repositories\Miscellanious\MultimediaRepository.cs" />
     <Compile Include="Data\Repositories\Products\RepositoryProduct.cs" />
     <Compile Include="Data\Repositories\Products\ValidationProduct.cs" />
+    <Compile Include="Data\Repositories\Register\RegisterRepository.cs" />
+    <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,9 +202,11 @@
   <ItemGroup>
     <Content Include="Assets\css\layouts\general.css" />
     <Content Include="Assets\css\base.css" />
+    <Content Include="Assets\css\layouts\nonav.css" />
     <Content Include="Assets\css\material-icons.css" />
     <Content Include="Assets\css\styles.css" />
     <Content Include="Assets\css\materialize.min.css" />
+    <Content Include="Assets\img\open.jpg" />
     <Content Include="Assets\js\master.js" />
     <Content Include="Assets\js\Product\ProductBase.js" />
     <Content Include="Assets\js\templates\general.js" />
@@ -271,13 +282,15 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\Layouts\NoNav\_Layout2.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\Repositories\Roles\" />
     <Folder Include="Data\Repositories\Users\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\ApiAutocomplete\" />
     <Folder Include="Views\Shared\Layouts\Admin\" />
   </ItemGroup>
   <ItemGroup>

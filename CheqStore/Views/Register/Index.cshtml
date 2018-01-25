@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts/NoNav/_Layout2.cshtml";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+            <div class="card-panel  blue-grey darken-1">
+                <span class="white-text">
+                    @ViewBag.Message
+                </span>
+            </div>
+     }
+<section class="white square-form">
+    @using (Html.BeginForm("Index", "Register", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <h5 class="blue-grey-text text-lighten-3"> Registrarme </h5>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <label for="username">Name</label>
+                <input id="username" name="Name" type="text" class="validate" value=registerRequest.Name>
+            </div>
+
+            <div class="input-field col s12">
+                <label for="username">Username</label>
+                <input id="username" name="Username" type="text" class="validate">
+            </div>
+
+            <div class="input-field col s12">
+                <label for="password">Password</label>
+                <input id="password" name="Password" type="password" class="validate">
+            </div>
+
+
+        </div>
+
+        <button type="submit"
+                class="waves-effect waves-light btn-large square-form__button">
+            <i class="material-icons right">send</i>
+            Ingresar
+        </button>
+
+        
+    }
+
+</section>

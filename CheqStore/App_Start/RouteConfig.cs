@@ -12,6 +12,11 @@ namespace CheqStore
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+                name: "Login",
+                url: "Login/{action}/",
+                defaults: new { controller = "Login", action = "Login"}
+            );
 
             routes.MapRoute(
                 name: "Default",

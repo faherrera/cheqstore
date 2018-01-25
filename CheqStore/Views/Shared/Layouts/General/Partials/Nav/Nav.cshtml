@@ -1,4 +1,4 @@
-﻿    @if (false) //Aquí haré gestiones sobre la session.
+﻿    @if (!string.IsNullOrEmpty(Session["Username"] as String)) //Aquí haré gestiones sobre la session.
     {
         @Html.Partial("~/Views/Shared/Layouts/General/Partials/Nav/Auth/Auth.cshtml")
     }else

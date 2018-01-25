@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using CheqStore.DAL;
 using CheqStore.Models;
 using CheqStore.Data.Repositories.Products;
+using CheqStore.Filters;
 
 namespace CheqStore.Controllers
 {
@@ -21,9 +22,15 @@ namespace CheqStore.Controllers
         {
             ViewBag.Categories = db.Categories.ToList();
 
+            if (!string.IsNullOrEmpty(TempData["Message"] as string))
+            {
+                ViewBag.Message = TempData["Message"] as string;
+            }
+
             return View(db.Products.ToList());
         }
 
+        [CustomAuthorizeAttribute("Cliente")]
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
