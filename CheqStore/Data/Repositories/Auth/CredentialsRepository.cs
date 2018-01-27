@@ -39,5 +39,14 @@ namespace CheqStore.Data.Repositories.Auth
             HttpContext.Current.Session["UserID"] = ctx.Users.First(u => u.Username == Username).UserID;
 
         }
+
+        /// <summary>
+        /// Destruyo / Limpio los datos en sesion.
+        /// </summary>
+        /// <param name="Username"></param>
+        public static void DestroySession()
+        {
+            HttpContext.Current.Session.Clear();
+        }
     }
 }

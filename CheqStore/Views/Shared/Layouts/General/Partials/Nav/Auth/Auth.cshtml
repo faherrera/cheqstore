@@ -1,15 +1,16 @@
 ﻿
 
 <ul class="right hide-on-med-and-down">
-    <li><a href="#!">Todos nuestros productos</a></li>
-    <li><a href="#!">Contactanos</a></li>
-    <li><a href="#!"><i class="material-icons">shopping_cart</i></a> </li>
-    <li><a href="#!"><i class="material-icons">account_circle</i></a></li>
+    <li><a href="@Url.Action("Index","Products")" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Ir a todos nuestros productos"> <i class="material-icons">view_module</i></a> </li>
+    <li><a href="#!" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Ir al carrito" ><i class="material-icons">shopping_cart</i></a> </li>
+    <li><a href="#!" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Ir a mi cuenta"><i class="material-icons">account_circle</i></a></li>
+    <li><a href="@Url.Action("Logout","Login")" class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cerrar la sesion"> <i class="material-icons">exit_to_app</i></a> </li>   
 </ul>
 
 <ul class="side-nav" id="mobile-demo">
-    <li><a href="#!">Todos nuestros productos</a></li>
-    <li><a href="#!">Contactanos</a></li>
-    <li><a href="#!"><i class="material-icons">shopping_cart</i></a> </li>
-    <li><a href="#!"><i class="material-icons">account_circle</i></a></li>
+    <li><a href="@Url.Action("Index","Products")">Todos nuestros productos <i class="material-icons">view_module</i></a> </a></li>
+    <li><a href="#!">Carrito de compras<i class="material-icons">shopping_cart</i></a> </li>
+    <li><a href="#!"> Mi cuenta <i class="material-icons">account_circle</i></a></li>
+    <li><a href="@Url.Action("Logout","Login")"> Cerrar Sesion <i class="material-icons">exit_to_app</i></a></li>
+
 </ul>

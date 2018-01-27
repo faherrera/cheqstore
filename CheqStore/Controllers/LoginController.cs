@@ -1,4 +1,5 @@
 ﻿using CheqStore.Data.ModelNotMapped.Login;
+using CheqStore.Data.Repositories.Auth;
 using CheqStore.Data.Repositories.Login;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace CheqStore.Controllers
         {
             if (!string.IsNullOrEmpty(Session["Username"] as string))
             {
-                return RedirectToAction("GoToRoot");
+                return RedirectToAction("Index", "Products");
             }
             var repositoryLogin = RepositoryLogin.ProccessingLogin(loginClass);
 
@@ -39,9 +40,12 @@ namespace CheqStore.Controllers
             return RedirectToAction("Index", "Products");
         }
 
-        public ActionResult GoToRoot()
+
+        public ActionResult Logout()
         {
-            return RedirectToAction("Index","Products");
+            CredentialsRepository.DestroySession();
+
+            return RedirectToAction("Index", "Products");
         }
     }
 }
