@@ -45,31 +45,56 @@
             {
 
                 string image = (string.IsNullOrEmpty(item.PathPhoto)) ? "http://www.bitaccora.com/images/portal/web/imagenblanco.jpg" : "/Uploads/" + item.PathPhoto;
-                
-                <div class="col s12 m4 ">
-                    <div class="card hoverable">
 
+                //# form sin AJAX.
+                using (Html.BeginForm("AddProduct", "OrderView",FormMethod.Post,new { @class = "col s12 m4" }))
+                {
+                    <div class="card hoverable">
+                        <input class="hide" value=@item.ProductID name="ProductID" />
                         <div class="card-image product-card__image--list">
-                            <img src=@image >
-                            <a class="btn-floating pulse halfway-fab waves-effect waves-light  teal darken-2 "><i class="material-icons">add_shopping_cart</i></a>
+                            <img src=@image>
+                            <button  type="submit" class="btn-floating pulse halfway-fab waves-effect waves-light  teal darken-2 tooltipped AddToCart" data-position="bottom" data-delay="50" data-tooltip="Agregar al carrito"><i class="material-icons">add_shopping_cart</i></button>
                         </div>
 
                         <div class="card-content">
-                            <span class="card-title truncate" >@item.Name</span>
-                             
+                            <span class="card-title truncate" name="ProductName">@item.Name</span>
+
                             <strong class="collection-item valign-wrapper">
-                                <i class="material-icons ">monetization_on</i> Precio : @item.Price
+                                <i class="material-icons ">monetization_on</i> Precio : <span name="Price">@item.Price</span>
                             </strong>
 
                         </div>
 
                         <div class="card-action right-align">
 
-                            @Html.ActionLink("Ver más", "Details",new { id = item.ProductID }, new { @class="btn blue dark-3"})
+                            @Html.ActionLink("Ver más", "Details", new { id = item.ProductID }, new { @class = "btn blue dark-3" })
                         </div>
                     </div>
-                </div>
+                }
 
+                @*<div class="col s12 m4">
+                    <div class="card hoverable">
+                        <input class="hide" value=@item.ProductID name="ProductID" />
+                        <div class="card-image product-card__image--list">
+                            <img src=@image>
+                            <button id="#AddToCart" class="btn-floating pulse halfway-fab waves-effect waves-light  teal darken-2 tooltipped AddToCart" data-position="bottom" data-delay="50" data-tooltip="Agregar al carrito"><i class="material-icons">add_shopping_cart</i></button>
+                        </div>
+
+                        <div class="card-content">
+                            <span class="card-title truncate" name="ProductName">@item.Name</span>
+
+                            <strong class="collection-item valign-wrapper">
+                                <i class="material-icons ">monetization_on</i> Precio : <span name="Price">@item.Price</span>
+                            </strong>
+
+                        </div>
+
+                        <div class="card-action right-align">
+
+                            @Html.ActionLink("Ver más", "Details", new { id = item.ProductID }, new { @class = "btn blue dark-3" })
+                        </div>
+                    </div>
+                </div>*@
             }
         </div>
 
@@ -86,3 +111,6 @@
     </section>
 
 </div>
+@section Scripts{
+<script src="~/Assets/js/OrderView/OrderViewAjax.js"></script>
+}

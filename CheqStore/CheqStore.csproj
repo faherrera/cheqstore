@@ -160,6 +160,8 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OrderDetailsController.cs" />
+    <Compile Include="Controllers\OrderViewController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -169,12 +171,15 @@
     <Compile Include="Data\ModelNotMapped\BaseEntity\ResponseEntity.cs" />
     <Compile Include="Data\ModelNotMapped\Categories\CategoryAutocomplete.cs" />
     <Compile Include="Data\ModelNotMapped\Login\LoginClass.cs" />
+    <Compile Include="Data\ModelNotMapped\OrderView\OrderView.cs" />
+    <Compile Include="Data\ModelNotMapped\OrderView\ProductView.cs" />
     <Compile Include="Data\ModelNotMapped\Register\RegisterRequest.cs" />
     <Compile Include="Data\ModelNotMapped\Repositories\ResponseRequest.cs" />
     <Compile Include="Data\Repositories\Auth\CredentialsRepository.cs" />
     <Compile Include="Data\Repositories\Categories\RepositoryCategories.cs" />
     <Compile Include="Data\Repositories\Login\RepositoryLogin.cs" />
     <Compile Include="Data\Repositories\Miscellanious\MultimediaRepository.cs" />
+    <Compile Include="Data\Repositories\OrderView\OrderViewRepository.cs" />
     <Compile Include="Data\Repositories\Products\RepositoryProduct.cs" />
     <Compile Include="Data\Repositories\Products\ValidationProduct.cs" />
     <Compile Include="Data\Repositories\Register\RegisterRepository.cs" />
@@ -208,6 +213,7 @@
     <Content Include="Assets\css\materialize.min.css" />
     <Content Include="Assets\img\open.jpg" />
     <Content Include="Assets\js\master.js" />
+    <Content Include="Assets\js\OrderView\OrderViewAjax.js" />
     <Content Include="Assets\js\Product\ProductBase.js" />
     <Content Include="Assets\js\templates\general.js" />
     <Content Include="Assets\js\materialize.min.js" />
@@ -285,6 +291,8 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\Layouts\NoNav\_Layout2.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\OrderDetails\Index.cshtml" />
+    <Content Include="Views\OrderView\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

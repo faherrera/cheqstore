@@ -10,6 +10,7 @@ namespace CheqStore.Models
     {
         public int Quantity { get; set; }
         public Decimal Subtotal { get; set; }
+        public Decimal Price { get; set; }
         public int ProductID { get; set; } //ProductID is relationship with Product Table
         public int OrderID { get; set; } //OrderDetail belongs to one Order.
 

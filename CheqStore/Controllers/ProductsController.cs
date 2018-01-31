@@ -25,6 +25,7 @@ namespace CheqStore.Controllers
             if (!string.IsNullOrEmpty(TempData["Message"] as string))
             {
                 ViewBag.Message = TempData["Message"] as string;
+                TempData.Remove("Message"); //Limpio el TempData Message.
             }
 
             return View(db.Products.ToList());
