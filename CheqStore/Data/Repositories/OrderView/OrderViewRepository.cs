@@ -1,4 +1,6 @@
-﻿using CheqStore.Models;
+﻿using CheqStore.Data.ModelNotMapped.BaseEntity;
+using CheqStore.Data.Repositories.Products;
+using CheqStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,10 @@ namespace CheqStore.Data.Repositories.OrderView
 {
     public class OrderViewRepository
     {
-        public static void AddProductToCart(Product product)
+        public static ResponseEntity AddProductToCart(Product product)
         {
-
+            ResponseEntity res = new ResponseEntity();
+          
             //Saber si es nulo
             if (HttpContext.Current.Session["OrderView"]  == null)
             {
@@ -25,8 +28,18 @@ namespace CheqStore.Data.Repositories.OrderView
             {
                 var GetProduct = ListOrderView.Where(x => x.ProductID == product.ProductID).First();
 
+                int Quantity = GetProduct.Quantity + 1; //Sumo una nueva cantidad.
+
+                //Consulto si la cantidad nueva excede al stock del producto.
+                if (!RepositoryProduct.IsThereStockToProcess(GetProduct.ProductID, Quantity))
+                {
+                    return res = new ResponseEntity() { status = false, message = "No hay suficiente stock para realizar tal operacion" };
+                }
+
                 GetProduct.Quantity += 1; //Sumo una nueva cantidad.
-            }else
+
+            }
+            else
             {
                 var orderView = new ModelNotMapped.OrderView.OrderView() {
                     ProductID = product.ProductID,
@@ -35,10 +48,18 @@ namespace CheqStore.Data.Repositories.OrderView
                     Quantity = 1,
                 };
 
+                if (!RepositoryProduct.IsThereStockToProcess(orderView.ProductID, orderView.Quantity))
+                {
+                    return res = new ResponseEntity() { status = false, message = "No hay suficiente stock para realizar tal operacion" };
+                }
+
                 ListOrderView.Add(orderView);
             }
 
+         
+
             HttpContext.Current.Session["OrderView"] = ListOrderView;
+            return res = new ResponseEntity() { status = true, message = "" };
 
         }
 
@@ -50,7 +71,13 @@ namespace CheqStore.Data.Repositories.OrderView
             HttpContext.Current.Session["OrderView"] = new List<Data.ModelNotMapped.OrderView.OrderView>();
 
         }
-        
+
+        public static void OrderViewSessionEmpty()
+        {
+            HttpContext.Current.Session["OrderView"] = new List<Data.ModelNotMapped.OrderView.OrderView>();
+
+        }
+
         public static void RemoveProductFromCart(int ProductID)
         {
             //Listado de OrderView
@@ -75,6 +102,12 @@ namespace CheqStore.Data.Repositories.OrderView
 
             var NewOrder = ListOrderView;
             HttpContext.Current.Session["OrderView"] = NewOrder;
+
+        }
+
+        public static List<Data.ModelNotMapped.OrderView.OrderView> GetListOrderView()
+        {
+            return HttpContext.Current.Session["OrderView"] as List<Data.ModelNotMapped.OrderView.OrderView>;
 
         }
 

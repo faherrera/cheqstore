@@ -161,6 +161,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrderViewController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -179,6 +180,8 @@
     <Compile Include="Data\Repositories\Categories\RepositoryCategories.cs" />
     <Compile Include="Data\Repositories\Login\RepositoryLogin.cs" />
     <Compile Include="Data\Repositories\Miscellanious\MultimediaRepository.cs" />
+    <Compile Include="Data\Repositories\OrderDetail\OrderDetailRepository.cs" />
+    <Compile Include="Data\Repositories\Orders\OrdersRepository.cs" />
     <Compile Include="Data\Repositories\OrderView\OrderViewRepository.cs" />
     <Compile Include="Data\Repositories\Products\RepositoryProduct.cs" />
     <Compile Include="Data\Repositories\Products\ValidationProduct.cs" />
@@ -299,6 +302,7 @@
     <Folder Include="Data\Repositories\Roles\" />
     <Folder Include="Data\Repositories\Users\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Orders\" />
     <Folder Include="Views\Shared\Layouts\Admin\" />
   </ItemGroup>
   <ItemGroup>

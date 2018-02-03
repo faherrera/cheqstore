@@ -1,9 +1,22 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
+
+    decimal Total = 0;
+}
+
+@if (ViewBag.Message != null)
+{
+    <div class="col s12 teal white-text">
+        <strong> Mensaje: </strong>
+        <p>
+            @ViewBag.Message
+        </p>
+    </div>
 }
 
 <h2>Tu orden de compra </h2>
+
 
 @if (ViewBag.ListOrderView == null || ViewBag.ListOrderView.Count <= 0)
 {
@@ -24,43 +37,60 @@
     </div>
 }
 else
-{
+{ <table class="bordered striped responsive-table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>SubTotal</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
 
-<table class="bordered striped responsive-table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Precio unitario</th>
-            <th>Total</th>
-            <th>Opciones</th>
-        </tr>
-    </thead>
+        <tbody>
 
-    <tbody>
+            @foreach (var item in ViewBag.ListOrderView)
+            {
+                Total += item.Subtotal;
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>
+                        <td>@item.Subtotal</td>
+                        <td>
+                            @using (Html.BeginForm("RemoveProduct", "OrderView", FormMethod.Post,null))
+                            {     
+                            <input id="ProductID" class="hide" name="ProductID" value=@item.ProductID />
+                            <button  type="submit"  class="btn waves-effect red accent-2">Restar</button>
+                            }
+                        </td>
 
-        @foreach (var item in ViewBag.ListOrderView)
-        {
-                       
-                <tr>
-                    <td>@item.ProductName</td>
-                    <td>@item.Quantity</td>
-                    <td>@item.Price</td>
-                    <td>@item.Subtotal</td>
-                    <td>
-                        @using (Html.BeginForm("RemoveProduct", "OrderView", FormMethod.Post,null))
-                        {     
-                        <input id="ProductID" class="hide" name="ProductID" value=@item.ProductID />
-                        <button  type="submit"  class="btn-flat waves-effect waves-red">Eliminar</button>
-                        }
-                    </td>
-
-                </tr>
+                    </tr>
 
             
-        }
+            }
+
+            <tr>
+                <td><strong>Total</strong></td>
+                <td> </td>
+                <td> </td>
+                <td>@Total</td>
+                <td>
+                    @using (Html.BeginForm("Create", "OrderDetails", FormMethod.Post, null))
+                    {
+                    <button type="submit" class="btn waves-effect waves-blue"> <i class="material-icons right">payment</i>Comprar </button>
+                    }
+                </td>
+
+            </tr>
+
+
+
        
         
-    </tbody>
-</table>
+        </tbody>
+    </table>
+
+   
 }

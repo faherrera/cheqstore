@@ -5,6 +5,7 @@ using CheqStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -14,7 +15,7 @@ namespace CheqStore.Data.Repositories.Products
 {
     public class RepositoryProduct
     {
-        static CheqStoreContext ctx;
+        private static CheqStoreContext ctx;
 
         public static void StoreProduct(Product product, HttpPostedFileBase File)
         {
@@ -48,6 +49,59 @@ namespace CheqStore.Data.Repositories.Products
             ctx.Entry(product).State = EntityState.Modified;
             ctx.SaveChanges();
 
+        }
+
+        /// <summary>
+        /// Descuento cantidad al producto, en caso de que exceda me devuelve false y no se efectuará la compra, de lo contrario devolverá true.
+        /// </summary>
+        /// <param name="ProductID"></param>
+        /// <param name="Quantity"></param>
+        /// <returns></returns>
+        public static bool SubstractStock(int ProductID,int Quantity) {
+            using (var ctx = new CheqStoreContext())
+            {
+                Product product = ctx.Products.Find(ProductID);
+
+                if (!IsThereStockToProcess(ProductID, Quantity))
+                {
+                    return false;
+                }
+
+                try
+                {
+                    product.Stock -= Quantity;
+                    ctx.Entry(product).State = EntityState.Modified;
+                    ctx.SaveChanges();
+
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("El error es ->" + e.Message);
+                    return false;
+                }
+            }
+
+            
+            
+        }
+
+        /// <summary>
+        /// Pregunto si existe la cantidad suficiente como para procesar la solicitud.
+        /// </summary>
+        /// <param name="ProductID"></param>
+        /// <param name="Quantity"></param>
+        /// <returns></returns>
+        public static bool IsThereStockToProcess(int ProductID, int Quantity) {
+            ctx = new CheqStoreContext();
+            Product product = ctx.Products.Find(ProductID);
+
+            if (product.Stock - Quantity >= 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

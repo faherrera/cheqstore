@@ -18,7 +18,7 @@
             <div class="card-content">
                 <span class="card-title">@Model.Name</span>
 
-                <ul class="collection">
+                <ul class="collection product-card__collection">
                     <li class="collection-item valign-wrapper">
                         <p>
                             @Model.Description
@@ -27,13 +27,25 @@
                     </li>
                     <li class="collection-item valign-wrapper"><i class="material-icons">monetization_on</i> <strong> Precio :  </strong> $ @Model.Price</li>
                     <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria : </strong>@Model.Category.Name   </li>
+                    @if (@Model.Stock != 0)
+                    {
+                        <li class="collection-item valign-wrapper  teal darken-1 white-text"><i class="material-icons">done</i> <strong> Stock :  </strong> @Model.Stock</li>
+                    }
+                    else
+                    {
+                        <li class="collection-item valign-wrapper red accent-2"><i class="material-icons">not_interested</i> <strong> NO DISPONIBLE</strong></li>
+
+                    }
                 </ul>
             </div>
             <div class="card-action right-align">
-                <a href="#!" class="btn-large waves-effect waves-light" >
-                    Agregar a carrito
-                    <i class="material-icons right">add_shopping_cart</i>
-                </a>
+                @using (Html.BeginForm("AddProduct", "OrderView", FormMethod.Post))
+                {
+                    <input class="hide" value=@Model.ProductID name="ProductID" />
+                    <button type="submit" class="btn-large waves-effect waves-light tooltipped AddToCart" data-position="top" data-delay="20" data-tooltip="Agregar al carrito"><i class="material-icons">add_shopping_cart</i></button>
+
+                }
+
             </div>
         </div>
 

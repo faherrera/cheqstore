@@ -48,5 +48,10 @@ namespace CheqStore.Data.Repositories.Auth
         {
             HttpContext.Current.Session.Clear();
         }
+
+        public static bool IsThereSession()
+        {
+            return (HttpContext.Current.Session.Count > 0) ? true : false;
+        }
     }
 }

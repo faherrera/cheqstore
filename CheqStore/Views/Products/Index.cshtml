@@ -59,9 +59,20 @@
                         <div class="card-content">
                             <span class="card-title truncate" name="ProductName">@item.Name</span>
 
-                            <strong class="collection-item valign-wrapper">
-                                <i class="material-icons ">monetization_on</i> Precio : <span name="Price">@item.Price</span>
-                            </strong>
+                            <ul class="collection product-card__collection">
+                                <li class="collection-item valign-wrapper"><i class="material-icons">monetization_on</i> <strong> Precio:   </strong>  $@item.Price</li>
+                                <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria:  </strong> @item.Category.Name   </li>
+                                @if (@item.Stock != 0)
+                                {
+                                    <li class="collection-item valign-wrapper  teal darken-1 white-text"><i class="material-icons">done</i> <strong> Stock:  </strong>  @item.Stock</li>
+                                }
+                                else
+                                {
+                                    <li class="collection-item valign-wrapper red accent-2"><i class="material-icons">not_interested</i> <strong>NO DISPONIBLE</strong></li>
+
+                                }
+                            </ul>
+                            
 
                         </div>
 

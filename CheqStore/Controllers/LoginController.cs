@@ -35,6 +35,7 @@ namespace CheqStore.Controllers
             if (!repositoryLogin.status)
             {
                 ViewBag.Message = repositoryLogin.message;
+                return View();
             }
             TempData["Message"] = "Logueo Correcto";
             return RedirectToAction("Index", "Products");

@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace CheqStore.Controllers
 {
-    //[CustomAuthorize("Cliente")]
+    [CustomAuthorize("Cliente")]
     public class OrderViewController : Controller
     {
         private CheqStoreContext ctx = new CheqStoreContext();
@@ -50,7 +50,13 @@ namespace CheqStore.Controllers
                     return RedirectToAction("Index", "Product");
                 }
 
-                OrderViewRepository.AddProductToCart(getProduct);
+                var res = OrderViewRepository.AddProductToCart(getProduct);
+
+                if (!res.status)
+                {
+                    TempData["Message"] = res.message; 
+                    return RedirectToAction("Index", "Products");
+                }
 
                 return RedirectToAction("Index");
             }
