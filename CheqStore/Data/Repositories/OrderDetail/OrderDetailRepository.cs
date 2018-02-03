@@ -15,7 +15,7 @@ namespace CheqStore.Data.Repositories
 {
     public class OrderDetailRepository
     {
-        private static CheqStoreContext ctx;
+        private static CheqStoreContext ctx = new CheqStoreContext();
         private static ResponseEntity res;
         public static void StoreOrderDetail(OrderDetail orderDetail)
         {
@@ -30,7 +30,6 @@ namespace CheqStore.Data.Repositories
         /// <returns></returns>
         public static ResponseEntity GenerateOrderDetailWithOrder()
         {
-            ctx = new CheqStoreContext();
             res = new ResponseEntity();
 
             using (var trans = ctx.Database.BeginTransaction())
@@ -44,11 +43,16 @@ namespace CheqStore.Data.Repositories
                     Order order = new Order()
                     {
                         UserID = Convert.ToInt32(HttpContext.Current.Session["UserID"]),
+                        OrderDate = DateTime.Now,
+                        Status = false,
+                        CreatedAt = DateTime.Now
 
                     };
 
-                    OrdersRepository.StoreOrder(order); //Creando el Order.
+                    
+                    OrdersRepository.StoreOrder(ctx,order); //Creando el Order.
 
+                    decimal Quantity = 0;
 
                     foreach (var item in ListOrderView)
                     {
@@ -62,14 +66,17 @@ namespace CheqStore.Data.Repositories
 
                         };
 
-                        if (!RepositoryProduct.SubstractStock(item.ProductID,item.Quantity))
+                        if (!RepositoryProduct.SubstractStock(ctx,item.ProductID,item.Quantity) )
                         {
                             trans.Rollback();
                             return res = new ResponseEntity() { status = false, message = "La cantidad que quiere exige el stock del producto, por favor cambie su orden"};
                         }
 
+
                         StoreOrderDetail(orderDetail);
+                        Quantity += Quantity;
                     }
+                    OrdersRepository.UpdateTotal(ctx, order.ID, Quantity); //Actualizo el total.
                     trans.Commit();
                     OrderViewRepository.OrderViewSessionEmpty(); //Dejo vacia la orden
                     return res = new ResponseEntity() { status = true, message = "" };

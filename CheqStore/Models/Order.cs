@@ -16,5 +16,7 @@ namespace CheqStore.Models
 
         public int UserID { get; set; } //Order have conecction with a User.
         public virtual User User { get; set; }
+
+        public ICollection<OrderDetail> OrderDetail { get; set; }
     }
 }

@@ -57,9 +57,8 @@ namespace CheqStore.Data.Repositories.Products
         /// <param name="ProductID"></param>
         /// <param name="Quantity"></param>
         /// <returns></returns>
-        public static bool SubstractStock(int ProductID,int Quantity) {
-            using (var ctx = new CheqStoreContext())
-            {
+        public static bool SubstractStock(CheqStoreContext ctx, int ProductID,int Quantity) {
+            
                 Product product = ctx.Products.Find(ProductID);
 
                 if (!IsThereStockToProcess(ProductID, Quantity))
@@ -80,7 +79,7 @@ namespace CheqStore.Data.Repositories.Products
                     Debug.WriteLine("El error es ->" + e.Message);
                     return false;
                 }
-            }
+            
 
             
             
