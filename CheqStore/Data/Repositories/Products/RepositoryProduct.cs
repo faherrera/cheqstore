@@ -17,6 +17,18 @@ namespace CheqStore.Data.Repositories.Products
     {
         private static CheqStoreContext ctx;
 
+        public static List<Product> ListProductFromCategory(string Category)
+        {
+            ctx = new CheqStoreContext();
+
+            if (!ctx.Products.Any(c=> c.Category.Name == Category) || string.IsNullOrEmpty(Category))
+            {
+                return ctx.Products.ToList();
+            }
+
+            return ctx.Products.Where(x => x.Category.Name == Category).ToList();
+
+        }
         public static void StoreProduct(Product product, HttpPostedFileBase File)
         {
             ctx = new CheqStoreContext();

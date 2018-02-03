@@ -1,5 +1,6 @@
 ﻿using CheqStore.DAL;
 using CheqStore.Data.ModelNotMapped.Categories;
+using CheqStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace CheqStore.Data.Repositories.Categories
     public class RepositoryCategories
     {
         private CheqStoreContext ctx = new CheqStoreContext();
+
 
         public List<CategoryAutocomplete> CategoryAutocomplete()
         {

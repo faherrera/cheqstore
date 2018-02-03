@@ -32,7 +32,7 @@
                 foreach (var item in ViewBag.Categories)
                 {
                     @*<li class="collection-item"> @Html.ActionLink(@item.Name,"Detail","Categories",new { id = @item.CategoryID })</li>*@
-                    <li class="collection-item" style="display:flex"> <a href="./?category=@item.CategoryID" class="secondary-content" style="display:flex" >@item.Name<i class="material-icons">forward</i></a></li>
+                    <li class="collection-item" style="display:flex"> <a href="@Url.Action("Index","Products",new { @category = item.Name})" class="secondary-content" style="display:flex" >@item.Name<i class="material-icons">forward</i></a></li>
                 }
             }
 

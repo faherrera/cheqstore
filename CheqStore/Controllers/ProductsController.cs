@@ -18,7 +18,7 @@ namespace CheqStore.Controllers
         private CheqStoreContext db = new CheqStoreContext();
 
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(string category)
         {
             ViewBag.Categories = db.Categories.ToList();
 
@@ -27,9 +27,24 @@ namespace CheqStore.Controllers
                 ViewBag.Message = TempData["Message"] as string;
                 TempData.Remove("Message"); //Limpio el TempData Message.
             }
+            var Products = RepositoryProduct.ListProductFromCategory(category);
 
-            return View(db.Products.ToList());
+            return View(Products);
         }
+
+        //Listar por categoria
+        //public ActionResult index( string category)
+        //{
+        //    ViewBag.Categories = db.Categories.ToList();
+
+        //    if (!string.IsNullOrEmpty(TempData["Message"] as string))
+        //    {
+        //        ViewBag.Message = TempData["Message"] as string;
+        //        TempData.Remove("Message"); //Limpio el TempData Message.
+        //    }
+        //    var Products = RepositoryProduct.ListProductFromCategory(category);
+        //    return View("Index",Products);
+        //}
 
         [CustomAuthorizeAttribute("Cliente")]
         // GET: Products/Details/5
