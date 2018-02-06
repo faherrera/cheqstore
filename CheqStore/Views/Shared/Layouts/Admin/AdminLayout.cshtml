@@ -1,0 +1,142 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Dashboard - Chequer Store - </title>
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Assets/css/material-icons.css" rel="stylesheet" />
+    <link href="~/Assets/css/materialize.min.css" rel="stylesheet" />
+    <link href="~/Assets/css/base.css" rel="stylesheet" />
+    <link href="~/Assets/css/styles.css" rel="stylesheet" />
+    <link href="~/Assets/css/layouts/adminlayout.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+
+        <nav class="white hide-on-large-only">
+            <div class="nav-wrapper">
+                <a href="#" data-activates="slide-out" class="button-collapse black-text"><i class="material-icons">menu</i></a>
+                <ul id="slide-out" class="side-nav">
+                    <li>
+                        <div class="dashboard-aside__image-container blue darken-3">
+                            <img src="~/Assets/img/admin.png" alt="Img Admin" class="circle img-responsive" />
+                            <strong class="white-text"> Administrador </strong>
+                        </div>
+                    </li>
+
+                    <ul class="collapsible black-text" data-collapsible="accordion">
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                            <div class="collapsible-body">
+                                <ul class="collection">
+                                    <li class="collection-item">
+                                        <a href="#!">Alvin</a>
+                                    </li>
+                                    <li class="collection-item">
+                                        <a href="#!">Alvin</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                            <div class="collapsible-body">
+                                <ul class="collection">
+                                    <li class="collection-item">
+                                        <a href="#!">Alvin</a>
+                                    </li>
+                                    <li class="collection-item">
+                                        <a href="#!">Alvin</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        <li>
+                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                            <div class="collapsible-body">
+                                <ul class="collection">
+                                    <li class="collection-item">
+                                        <a href="#!">Alvin</a>
+                                    </li>
+                                    <li class="collection-item">
+                                        <a href="#!">Alvin</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </ul>
+
+            </div>
+        </nav>
+
+    </header>
+    <main role="main">
+        <div class="row" style="margin: 0">
+
+            <aside class="dashboard-aside fixed hide-on-med-and-down col l2 z-depth-2  ">
+                <div class="dashboard-aside__image-container blue darken-3">
+                    <img src="~/Assets/img/admin.png" alt="Img Admin" class="circle img-responsive" />
+                    <strong class="white-text"> Administrador </strong>
+                </div>
+
+
+                <ul class="collapsible" data-collapsible="accordion">
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                        <div class="collapsible-body">
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <a href="#!">Alvin</a>
+                                </li>
+                                <li class="collection-item">
+                                    <a href="#!">Alvin</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+                        <div class="collapsible-body">
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <a href="#!">Alvin</a>
+                                </li>
+                                <li class="collection-item">
+                                    <a href="#!">Alvin</a>
+                                </li>
+                            </ul>
+                        </div>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+                        <div class="collapsible-body">
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <a href="#!">Alvin</a>
+                                </li>
+                                <li class="collection-item">
+                                    <a href="#!">Alvin</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
+
+            </aside>
+
+            <section class="yield col s12 l10 ">
+                @RenderBody()
+            </section>
+        </div>
+    </main>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Assets/js/materialize.min.js"></script>
+    <script src="~/Assets/js/master.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

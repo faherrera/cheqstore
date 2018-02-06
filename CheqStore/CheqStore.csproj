@@ -156,6 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,12 +209,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\layouts\adminlayout.css" />
     <Content Include="Assets\css\layouts\general.css" />
     <Content Include="Assets\css\base.css" />
     <Content Include="Assets\css\layouts\nonav.css" />
     <Content Include="Assets\css\material-icons.css" />
     <Content Include="Assets\css\styles.css" />
     <Content Include="Assets\css\materialize.min.css" />
+    <Content Include="Assets\img\admin.png" />
     <Content Include="Assets\img\open.jpg" />
     <Content Include="Assets\js\master.js" />
     <Content Include="Assets\js\OrderView\OrderViewAjax.js" />
@@ -296,6 +299,8 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\OrderDetails\Index.cshtml" />
     <Content Include="Views\OrderView\Index.cshtml" />
+    <Content Include="Views\Shared\Layouts\Admin\AdminLayout.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,7 +308,6 @@
     <Folder Include="Data\Repositories\Users\" />
     <Folder Include="Uploads\" />
     <Folder Include="Views\Orders\" />
-    <Folder Include="Views\Shared\Layouts\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

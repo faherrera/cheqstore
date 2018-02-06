@@ -1,5 +1,5 @@
-﻿console.log("Está ejecutandose el master");
+﻿$('.button-collapse').sideNav();
 
-$(document).ready(function () {
+$('.collapsible').collapsible();
 
-});
+$('select').material_select();
