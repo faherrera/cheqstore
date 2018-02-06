@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheqStore.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CheqStore.Controllers
 {
+    //[CustomAuthorize("Admin")]
     public class AdminController : Controller
     {
         // GET: Admin
@@ -13,5 +15,6 @@ namespace CheqStore.Controllers
         {
             return View();
         }
+
     }
 }

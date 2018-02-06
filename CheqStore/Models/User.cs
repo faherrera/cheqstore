@@ -6,6 +6,11 @@ using System.Web;
 
 namespace CheqStore.Models
 {
+    public enum Rol
+    {
+        Admin,Cliente
+    }
+
     public class User
     {
         [Key]
@@ -14,11 +19,10 @@ namespace CheqStore.Models
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string PathPhoto { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public int RolID { get; set; } //Tipo de rol, será relacionada en el futuro.
-        public virtual Rol Rol { get; set; } //Relacionando con Rol.
+        public Rol Rol { get; set; } = Rol.Cliente;
+       
 
     }
 }

@@ -13,7 +13,6 @@ namespace CheqStore.DAL
         public CheqStoreContext() : base("CheqStoreContext") { }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Rol> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

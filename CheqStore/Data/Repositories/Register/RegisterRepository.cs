@@ -27,7 +27,6 @@ namespace CheqStore.Data.Repositories.Register
                     Name = registerRequest.Name,
                     Username = registerRequest.Username,
                     Password = CredentialsRepository.EncryptingPassword(registerRequest.Password),
-                    RolID = ctx.Roles.Where(r => r.Name.ToLower() == "cliente").First().ID,
                     CreatedAt = DateTime.Now,
                 };
 

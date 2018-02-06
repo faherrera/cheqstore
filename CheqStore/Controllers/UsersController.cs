@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using CheqStore.DAL;
 using CheqStore.Models;
+using CheqStore.Filters;
 
 namespace CheqStore.Controllers
 {
+    //[CustomAuthorize("Admin")]
     public class UsersController : Controller
     {
         private CheqStoreContext db = new CheqStoreContext();
@@ -47,7 +49,7 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Name,Username,Email,Password,PathPhoto,RolID,CreatedAt,UpdateAt")] User user)
+        public ActionResult Create([Bind(Include = "UserID,Name,Username,Email,Password,PathPhoto,CreatedAt,Rol")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +81,7 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Name,Username,Email,Password,PathPhoto,RolID,CreatedAt,UpdateAt")] User user)
+        public ActionResult Edit([Bind(Include = "UserID,Name,Username,Email,Password,PathPhoto,CreatedAt,Rol")] User user)
         {
             if (ModelState.IsValid)
             {

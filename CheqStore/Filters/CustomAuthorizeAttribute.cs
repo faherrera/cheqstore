@@ -11,12 +11,12 @@ namespace CheqStore.Filters
     {
         private CheqStoreContext ctx = new CheqStoreContext();
 
-        private string rol;
+        private Models.Rol rol;
         private bool authorize = false;
 
         public CustomAuthorizeAttribute( string rol)
         {
-            this.rol = rol; 
+            this.rol = (Models.Rol) Enum.Parse(typeof(Models.Rol),rol); //Convierto en rol 
         }
 
 
@@ -26,7 +26,7 @@ namespace CheqStore.Filters
             {
                 string username = filterContext.HttpContext.Session["Username"] as string;
 
-                authorize = ctx.Users.Any(x => x.Username == username && x.Rol.Name == this.rol);
+                authorize = ctx.Users.Any(x => x.Username == username && x.Rol == rol);
             }
             
             if (!authorize) //Si no esta autorizado
@@ -34,7 +34,7 @@ namespace CheqStore.Filters
 
                 base.OnAuthorization(filterContext);
                 
-                
+                //hacer un Switch, en caso de que se solicite admin enviar a un Admin/login en caso de cliente a /login al igual que default
                 filterContext.RequestContext.HttpContext.Response.Redirect("/Login", true);
             }
         }

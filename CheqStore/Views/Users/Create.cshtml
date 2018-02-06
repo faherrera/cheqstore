@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
+    Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
 }
 
 <h2>Create</h2>
@@ -56,14 +56,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.RolID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RolID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RolID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
@@ -72,10 +64,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UpdateAt, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Rol, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UpdateAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UpdateAt, "", new { @class = "text-danger" })
+                @Html.EnumDropDownListFor(model => model.Rol, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Rol, "", new { @class = "text-danger" })
             </div>
         </div>
 

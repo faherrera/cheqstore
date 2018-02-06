@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
+    Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
 }
 
 <h2>Index</h2>
@@ -21,20 +21,10 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
+   
+    
         <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PathPhoto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RolID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateAt)
+            @Html.DisplayNameFor(model => model.Rol)
         </th>
         <th></th>
     </tr>
@@ -50,20 +40,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
+
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PathPhoto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RolID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateAt)
+            @Html.DisplayFor(modelItem => item.Rol)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
