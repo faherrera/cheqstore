@@ -17,17 +17,33 @@ namespace CheqStore.Data.Repositories.Orders
             ctx.SaveChanges();
         }
 
-        public static void UpdateOrder(Order order)
+        public static void UpdateOrder(CheqStoreContext ctx,Order order)
         {
-            //Aqui debo poner que reciba un cambio en el estado y un cambio en la fecha de confirmacion.
+            using (ctx)
+            {
+                order.Status = !order.Status;
+
+                if (order.Status)
+                {
+                    order.ConfirmedDate = DateTime.Now;
+
+                }else
+                {
+                    order.ConfirmedDate = null;
+                }
+
+                ctx.Entry(order).State = System.Data.Entity.EntityState.Modified;
+                ctx.SaveChanges();
+
+            }
         }
 
-        public static void UpdateTotal(CheqStoreContext ctx,int OrderID,decimal Quantity) {
+        public static void UpdateTotal(CheqStoreContext ctx,int OrderID,decimal Total) {
            
 
             Order order = ctx.Orders.Find(OrderID);
 
-            order.Total = Quantity;
+            order.Total = Total;
 
             ctx.Entry(order).State = System.Data.Entity.EntityState.Modified;
 
@@ -44,6 +60,22 @@ namespace CheqStore.Data.Repositories.Orders
                 ctx.SaveChanges();
 
             }
+        }
+
+        public static void UpdateStatus(int OrderID)
+        {
+            ctx = new CheqStoreContext();
+            var Order = ctx.Orders.Find(OrderID);
+
+            UpdateOrder(ctx,Order);
+
+
+        }
+
+        public static Order GetByID(int id) {
+            ctx = new CheqStoreContext();
+
+            return ctx.Orders.FirstOrDefault(x=> x.ID == id);
         }
     }
 }

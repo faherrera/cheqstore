@@ -17,8 +17,9 @@
 <body>
     <header>
 
-        <nav class="white hide-on-large-only">
+        <nav class="white">
             <div class="nav-wrapper">
+                <a href="/Admin" class="brand-logo indigo-text text-lighten-1" >CheqStore Dash</a>
                 <a href="#" data-activates="slide-out" class="button-collapse black-text"><i class="material-icons">menu</i></a>
                 <ul id="slide-out" class="side-nav">
                     <li>
@@ -77,7 +78,7 @@
     <main role="main">
         <div class="row" style="margin: 0">
 
-            <aside class="dashboard-aside fixed hide-on-med-and-down col l2 z-depth-2  ">
+            @*<aside class="dashboard-aside fixed hide-on-med-and-down col l2 z-depth-2  ">
                 <div class="dashboard-aside__image-container blue darken-3">
                     <img src="~/Assets/img/admin.png" alt="Img Admin" class="circle img-responsive" />
                     <strong class="white-text"> Administrador </strong>
@@ -126,13 +127,41 @@
                 </ul>
 
 
-            </aside>
+            </aside>*@
 
-            <section class="yield col s12 l10 ">
-                @RenderBody()
+            <section class="yield col s12">
+                <div class="container">
+
+                    @RenderBody()
+                </div>
             </section>
         </div>
     </main>
+    <footer class="page-footer  white z-depth-4" >
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="grey-text darken-4">CheqStore</h5>
+                    <p class="indigo-text text-lighten-1">Los mejores productos.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="grey-text darken-1">Links publicos</h5>
+                    <ul>
+                        <li><a class="indigo-text text-lighten-1" href="/">Home</a></li>
+                        <li><a class="indigo-text text-lighten-1" href="@Url.Action("Index","Products")">Listado de productos</a></li>
+                        <li><a class="indigo-text text-lighten-1" href="@Url.Action("Login","Login")">Login como cliente</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright  grey lighten-3">
+            <div class="container grey-text darken-4">
+                © 2018 CheqStore
+                <a class="grey-text darken-4 right" href="#!">- </a>
+            </div>
+        </div>
+    </footer>
+
 
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Assets/js/materialize.min.js"></script>

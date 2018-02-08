@@ -1,0 +1,78 @@
+﻿@model List<CheqStore.Models.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Partials/Bread/Index.cshtml", "ProductsAdmin")
+<a href="@Url.Action("Create","ProductsAdmin")" class="waves-effect waves-light tooltipped green lighten-3 btn-large btn-text-icon right" data-position="top" data-delay="20" data-tooltip="Crear nuevo producto"> <strong>Nuevo producto</strong><i class="medium material-icons ">add_circle</i></a>
+
+@if (ViewBag.Message != null)
+{
+    <div class="col s12 blue-grey lighten-1 center-align">
+        <p>
+            @ViewBag.Message
+        </p>
+    </div>
+}
+
+
+<table class="striped col s12 responsive-table highlight">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Imagen </th>
+            <th>Fecha de creacion </th>
+            <th>Categoria </th>
+            <th> Opciones </th>
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string image = (string.IsNullOrEmpty(item.PathPhoto)) ? "/Assets/img/noImage.jpg" : "/Uploads/" + item.PathPhoto;
+            string Categoria = (item.CategoryID != null) ? item.Category.Name : "Sin Categoria";
+            <tr>
+                <td>@item.ProductID</td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>$@item.Price</td>
+                <td>                    
+                    @if (item.Stock == 0)
+                        { <strong>Sin stock disponible</strong>}
+                    else
+                        {  <strong>@item.Stock</strong>}
+
+                </td>
+                <td>
+                    <img src=@image class="img-responsive" style="height:200px"/>
+                </td>
+                <td>@item.CreatedAt</td>
+                <td>@Categoria</td>
+                <td>
+                    <a href="@Url.Action("Details","ProductsAdmin",new { id = item.ProductID})" class="waves-effect waves-light blue darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Detalle informativo del producto"><i class="material-icons">details</i></a>
+                    @using (Html.BeginForm("Delete", "ProductsAdmin",new { id = item.ProductID}, FormMethod.Post,null))
+                    {
+                        <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@item.ProductID" data-position="top" data-delay="30" data-tooltip="Eliminar Producto"><i class="material-icons">delete_forever</i></button>
+                    }
+
+                </td>
+
+            </tr>
+        }
+
+
+    </tbody>
+</table>
+
+@section Scripts{
+    <script src="~/Assets/js/Orders/orders.js"></script>
+    <script src="~/Assets/js/Orders/DeleteAjax.js"></script>
+}

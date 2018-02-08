@@ -164,6 +164,7 @@
     <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrderViewController.cs" />
+    <Compile Include="Controllers\ProductsAdminController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -215,8 +216,12 @@
     <Content Include="Assets\css\styles.css" />
     <Content Include="Assets\css\materialize.min.css" />
     <Content Include="Assets\img\admin.png" />
+    <Content Include="Assets\img\noImage.jpg" />
     <Content Include="Assets\img\open.jpg" />
+    <Content Include="Assets\img\UserImage.jpg" />
     <Content Include="Assets\js\master.js" />
+    <Content Include="Assets\js\Orders\DeleteAjax.js" />
+    <Content Include="Assets\js\Orders\orders.js" />
     <Content Include="Assets\js\OrderView\OrderViewAjax.js" />
     <Content Include="Assets\js\Product\ProductBase.js" />
     <Content Include="Assets\js\templates\general.js" />
@@ -296,13 +301,20 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Shared\Partials\Bread\Detail.cshtml" />
+    <Content Include="Views\Shared\Partials\Bread\Index.cshtml" />
+    <Content Include="Views\ProductsAdmin\Details.cshtml" />
+    <Content Include="Views\ProductsAdmin\Index.cshtml" />
+    <Content Include="Views\ProductsAdmin\Create.cshtml" />
+    <Content Include="Views\ProductsAdmin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\Repositories\Roles\" />
     <Folder Include="Data\Repositories\Users\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\Orders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,0 +1,76 @@
+﻿@model CheqStore.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
+}
+
+@Html.Partial("~/Views/Shared/Partials/Bread/Detail.cshtml", "Orders")
+
+<h2>Order con ID N° @Model.ID</h2>
+
+
+
+<div class="card ">
+   
+    <div class="card-content">
+        <span class="card-title"> Informacion de la orden</span>
+        <br />
+        <ul class="collection ">
+            <li class="collection-item valign-wrapper">
+                <i class="material-icons">face</i> <strong> Destinatario: </strong> <em> @Model.User.Name </em>  con username <em>@Model.User.Username</em></li>
+            <li class="collection-item valign-wrapper">
+                <i class="material-icons">payment</i> <strong> Monto Total de la orden: </strong><span> $@Model.Total</span></li>
+            <li class="collection-item valign-wrapper">
+                <i class="material-icons">bookmark</i>
+                <strong> Estado de la orden: </strong>
+                @using (Html.BeginForm("UpdateStatus", "Orders", new { id = Model.ID }, FormMethod.Post, null))
+                {
+                    if (Model.Status)
+                    {  <button class="waves-effect waves-light green darken-2 btn tooltipped btn-material-icon" data-position="top" data-delay="30" data-tooltip="Click para cambiar a pendiente"><strong> Pagado </strong><i class="material-icons ">done_all</i> </button>}
+                    else
+                    {  <button class="waves-effect waves-light red lighten-1 btn tooltipped btn-material-icon" data-position="top" data-delay="30" data-tooltip="Click para cambiar a Pagado"><strong>Pendiente</strong> <i class="material-icons ">not_interested</i> </button>}
+
+                }
+            </li>
+            
+        </ul>
+
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>Listado de detalles de la orden</h4></li>
+           
+            @foreach (var item in ViewBag.OrderDetails)
+            {
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">shopping_cart</i>
+                    <h5 class="title"><strong>@item.Product.Name</strong></h5>
+                    <p>
+                        <strong> Cantidad </strong> <span> @item.Quantity</span>
+                    </p>
+                    <p>
+                        <strong> Precio unitario </strong> <span> @item.Price</span>
+                    </p>
+                    <p>
+                        <strong> Subtotal </strong> <span> @item.Subtotal</span>
+                    </p>
+                    <span class="secondary-content"><i class="material-icons">grade</i></span>
+                </li>
+            }
+            
+
+        </ul>
+
+    </div>
+    <div class="card-action right-align">
+       @using (Html.BeginForm("Delete", "Orders", new { id = Model.ID }, FormMethod.Post, null))
+       {
+
+        <button class="waves-effect waves-light red darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Eliminar orden"><i class="material-icons">delete_forever</i> Borrar orden @Model.ID</button>
+
+       }
+
+    </div>
+</div>
+
+
+

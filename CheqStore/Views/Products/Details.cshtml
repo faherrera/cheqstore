@@ -3,9 +3,11 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
-    string image = (string.IsNullOrEmpty(Model.PathPhoto)) ? "http://www.bitaccora.com/images/portal/web/imagenblanco.jpg" : "/Uploads/" + @Model.PathPhoto;
-    
+    string image = (string.IsNullOrEmpty(Model.PathPhoto)) ? "~/Assets/img/noImage.jpg" : "/Uploads/" + @Model.PathPhoto;
+    string Categoria = (Model.CategoryID != null) ? Model.Category.Name : "Sin Categoria";
+
 }
+
 
 <h2>Detalle de los productos</h2>
 
@@ -26,7 +28,7 @@
 
                     </li>
                     <li class="collection-item valign-wrapper"><i class="material-icons">monetization_on</i> <strong> Precio :  </strong> $ @Model.Price</li>
-                    <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria : </strong>@Model.Category.Name   </li>
+                    <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria : </strong>@Categoria  </li>
                     @if (@Model.Stock != 0)
                     {
                         <li class="collection-item valign-wrapper  teal darken-1 white-text"><i class="material-icons">done</i> <strong> Stock :  </strong> @Model.Stock</li>
@@ -49,8 +51,3 @@
             </div>
         </div>
 
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -3,20 +3,22 @@
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
+
+    bool IsGreater = (ViewBag.CategoryID.Count > 0 ) ? true : false;
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm("Create","Products",FormMethod.Post, new { enctype = "multipart/form-data" })) 
+@using (Html.BeginForm("Create", "ProductsAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Product</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-       
+
         <div id="preview"></div>
 
         <div class="file-field input-field">
@@ -64,32 +66,54 @@
             </div>
         </div>
 
-       
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Category.Name)
-            <div class="blue accent-3">
-                @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" ,@style = "display:block" })
+
+        <div class="input-field">
+            <div class="row">
+                @if (IsGreater)
+                {
+                    <div class="col s12 m8">
+                        <select name="CategoryID">
+                            <option value="0" disabled selected>Elige una categoria</option>
+                            @foreach (var item in ViewBag.CategoryID)
+                            {
+                                <option value="@item.CategoryID">@item.Name</option>
+
+                            }
+
+                        </select>
+                        <label>Seleccionar Categoria</label>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <a href="@Url.Action("Create","Categories")" class="btn-large blue lighten-2 btn-text-icon" id="AddCategoryModal"> Agregar nueva Categoria <i class="material-icons">add_circle</i></a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col s12 m4">
+                        <a href="@Url.Action("Create","Categories")" class="btn-large blue lighten-2 btn-text-icon" id="AddCategoryModal"> Debe Agregar una nueva Categoria <i class="material-icons">add_circle</i></a>
+                    </div>
+                }
+
             </div>
-                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+         
         </div>
 
 
+        @if (IsGreater)
+        {
+            <input type="submit" value="Create" class="btn" />
+        }else
+        {
+          <a href="#!" class="btn yellow lighten-2" > No puede crear hasta que no tenga alguna categoria cargada</a>
+        }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn" />
-            </div>
-        </div>
 
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts{
-    
+
     <script src="~/Assets/js/Product/ProductBase.js"></script>
 }

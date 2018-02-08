@@ -9,58 +9,80 @@
 
 <div>
     <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    
+    <div class="row">
+        <div class="col s12 offset-m3 m7">
+            <div class="card">
+                <div class="card-image">
+                    <img src="~/Assets/img/UserImage.jpg" style="max-height: 600px; object-fit: contain"class="img-responsive"/>
+                    <span class="card-title">@Model.Name</span>
+                </div>
+                <div class="card-content">
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                    <ul class="collection with-header">
+                        <li class="collection-header"><h4>Informacion del usuaro</h4></li>
+                        <li class="collection-item">
+                            <strong> Username: </strong><span>@Model.Username</span>
+                        </li>
+                        <li class="collection-item">
+                            <strong> Email: </strong><span>@Model.Email</span>
+                        </li>
+                        <li class="collection-item">
+                            <strong> Rol: </strong><span>@Model.Rol</span>
+                        </li>
+                         @if (Model.Rol.ToString() == "Cliente")
+                         {
+                             bool IsNull = (ViewBag.Orders == null) ? true : false;
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
+                             var Orders = ViewBag.Orders;
+                             
+                             <li class="collection-item">
 
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
+                                <strong> Ordenes solicitadas: </strong>
+                                    @if (IsNull || Orders.Count == 0)
+                                    {
+                                        <span>
+                                            Ninguna orden por el momento
+                                        </span>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in Orders)
+                                        {
+                                            <ul class="collection">
+                                                    <li class="collection-item "><strong>Numero de orden:  </strong><span>@item.ID</span></li>
+                                                    @if (!@item.Status)
+                                                    {
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                                                        <li class="collection-item active"><strong>Estado:  </strong><span> PAGADO </span></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li class="collection-item red lighten-2 "><strong>Estado:  </strong><span> PENDIENTE </span></li>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                                                    }
+                                                    <li class="collection-item center" >
+                                                        <a href="@Url.Action("Details","Orders",new { id= @item.ID})"class="btn-large blue lighten-2 "> Detalle de la orden @item.ID</a>
+                                                    </li>
+                                            </ul>
+                                        }
+                                    }
+                            </li>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                         }
 
+                    </ul>
+
+                </div>
+                <div class="card-action right-align">
+                    <a href="@Url.Action("Edit","Categories",new { id=Model.UserID})" class="btn-large waves-effect waves-light tooltipped blue lighten-3" data-position="top" data-delay="20" data-tooltip="Editar producto"><i class="material-icons">edit</i></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
        
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Rol)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Rol)
-        </dd>
-
-    </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |

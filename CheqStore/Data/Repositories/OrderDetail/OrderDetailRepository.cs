@@ -52,7 +52,7 @@ namespace CheqStore.Data.Repositories
                     
                     OrdersRepository.StoreOrder(ctx,order); //Creando el Order.
 
-                    decimal Quantity = 0;
+                    decimal Total = 0;
 
                     foreach (var item in ListOrderView)
                     {
@@ -74,9 +74,9 @@ namespace CheqStore.Data.Repositories
 
 
                         StoreOrderDetail(orderDetail);
-                        Quantity += Quantity;
+                        Total += orderDetail.Subtotal;
                     }
-                    OrdersRepository.UpdateTotal(ctx, order.ID, Quantity); //Actualizo el total.
+                    OrdersRepository.UpdateTotal(ctx, order.ID, Total); //Actualizo el total.
                     trans.Commit();
                     OrderViewRepository.OrderViewSessionEmpty(); //Dejo vacia la orden
                     return res = new ResponseEntity() { status = true, message = "" };

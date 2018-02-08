@@ -1,0 +1,49 @@
+﻿@model CheqStore.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
+    string image = (string.IsNullOrEmpty(Model.PathPhoto)) ? "/Assets/img/noImage.jpg" : "/Uploads/" + @Model.PathPhoto;
+    string Categoria = (Model.CategoryID != null) ? Model.Category.Name : "Sin Categoria";
+
+}
+
+@Html.Partial("~/Views/Shared/Partials/Bread/Detail.cshtml", "ProductsAdmin")
+
+<h2>Detalle de los productos</h2>
+
+
+
+<div class="card ">
+    <div class="card-image product-card__image--detail">
+        <img class="materialboxed" src=@image data-caption=@Model.Name>
+    </div>
+    <div class="card-content">
+        <span class="card-title">@Model.Name</span>
+
+        <ul class="collection product-card__collection">
+            <li class="collection-item valign-wrapper">
+                <p>
+                    @Model.Description
+                </p>
+
+            </li>
+            <li class="collection-item valign-wrapper"><i class="material-icons">monetization_on</i> <strong> Precio :  </strong> $ @Model.Price</li>
+            <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria : </strong>@Categoria   </li>
+            @if (@Model.Stock != 0)
+            {
+                <li class="collection-item valign-wrapper  teal darken-1 white-text"><i class="material-icons">done</i> <strong> Stock :  </strong> @Model.Stock</li>
+            }
+            else
+            {
+                <li class="collection-item valign-wrapper red accent-2"><i class="material-icons">not_interested</i> <strong> NO DISPONIBLE</strong></li>
+
+            }
+        </ul>
+    </div>
+    <div class="card-action right-align">
+        <a  href="@Url.Action("Edit","ProductsAdmin",new { id=Model.ProductID})"class="btn-large waves-effect waves-light tooltipped blue lighten-3" data-position="top" data-delay="20" data-tooltip="Editar producto"><i class="material-icons">edit</i></a>
+
+    </div>
+</div>
+

@@ -35,6 +35,10 @@ namespace CheqStore.Controllers
             {
                 return HttpNotFound();
             }
+            if (user.Rol.ToString() == "Cliente")
+            {
+                ViewBag.Orders = db.Orders.ToList();
+            }
             return View(user);
         }
 

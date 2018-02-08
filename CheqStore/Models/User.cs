@@ -23,6 +23,7 @@ namespace CheqStore.Models
 
         public Rol Rol { get; set; } = Rol.Cliente;
        
+        public ICollection<Order> Orders { get; set; }
 
     }
 }

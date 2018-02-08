@@ -28,7 +28,7 @@
             
             @if (ViewBag.Categories != null)
             {
-
+                <li class="collection-item" style="display:flex"> <a href="@Url.Action("Index","Products")" class="secondary-content" style="display:flex">Listar todos <i class="material-icons">all_inclusive</i></a></li>
                 foreach (var item in ViewBag.Categories)
                 {
                     @*<li class="collection-item"> @Html.ActionLink(@item.Name,"Detail","Categories",new { id = @item.CategoryID })</li>*@
@@ -45,6 +45,7 @@
             {
 
                 string image = (string.IsNullOrEmpty(item.PathPhoto)) ? "http://www.bitaccora.com/images/portal/web/imagenblanco.jpg" : "/Uploads/" + item.PathPhoto;
+                string Categoria = (item.CategoryID != null) ? item.Category.Name : "Sin Categoria";
 
                 //# form sin AJAX.
                 using (Html.BeginForm("AddProduct", "OrderView",FormMethod.Post,new { @class = "col s12 m4" }))
@@ -61,7 +62,7 @@
 
                             <ul class="collection product-card__collection">
                                 <li class="collection-item valign-wrapper"><i class="material-icons">monetization_on</i> <strong> Precio:   </strong>  $@item.Price</li>
-                                <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria:  </strong> @item.Category.Name   </li>
+                                <li class="collection-item valign-wrapper"><i class="material-icons">bookmark</i> <strong> Categoria:  </strong> @Categoria   </li>
                                 @if (@item.Stock != 0)
                                 {
                                     <li class="collection-item valign-wrapper  teal darken-1 white-text"><i class="material-icons">done</i> <strong> Stock:  </strong>  @item.Stock</li>
