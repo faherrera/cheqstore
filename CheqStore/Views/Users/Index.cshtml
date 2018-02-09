@@ -5,51 +5,54 @@
     Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+@Html.Partial("~/Views/Shared/Partials/Bread/Index.cshtml", "Users")
+<a href="@Url.Action("Create","Users")" class="waves-effect waves-light tooltipped green lighten-3 btn-large btn-text-icon right" data-position="top" data-delay="20" data-tooltip="Crear nuevo usuario"> <strong>Nuevo Usuario</strong><i class="medium material-icons ">add_circle</i></a>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-   
-    
-        <th>
-            @Html.DisplayNameFor(model => model.Rol)
-        </th>
-        <th></th>
-    </tr>
+<table class="bordered striped highlight responsive-table ">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.UserID)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Username)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Rol)</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
+    <tbody>
+      @foreach (var item in Model)
+      {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Rol)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.UserID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.UserID })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol)
+            </td>
+            <td>
+                <a href="@Url.Action("Details","Users",new { id = item.UserID})" class="waves-effect waves-light blue darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Detalle informativo del usuario"><i class="material-icons">details</i></a>
+                @using (Html.BeginForm("Delete", "Users", new { id = item.UserID }, FormMethod.Post, null))
+                {
+                    <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@item.UserID" data-position="top" data-delay="30" data-tooltip="Eliminar Usuario"><i class="material-icons">delete_forever</i></button>
+                }
 
+            </td>
+
+        </tr>
+      }
+
+    </tbody>
 </table>
+
+

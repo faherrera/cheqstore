@@ -23,10 +23,10 @@ namespace CheqStore.Data.Repositories.Products
 
             if (!ctx.Products.Any(c=> c.Category.Name == Category) || string.IsNullOrEmpty(Category))
             {
-                return ctx.Products.ToList();
+                return ctx.Products.Where(p=> p.StatusLogic == true && p.Stock > 0).ToList();
             }
 
-            return ctx.Products.Where(x => x.Category.Name == Category).ToList();
+            return ctx.Products.Where(p => p.Category.Name == Category && p.StatusLogic == true && p.Stock > 0).ToList();
 
         }
         public static void StoreProduct(Product product, HttpPostedFileBase File)
@@ -61,6 +61,30 @@ namespace CheqStore.Data.Repositories.Products
             ctx.Entry(product).State = EntityState.Modified;
             ctx.SaveChanges();
 
+        }
+
+        /// <summary>
+        /// Como producto tendrá un borrado logico, para no entorpecer los detalles de la orden y orden detail, esto lo que hará será actualizar el estado e indicar si está visible o no.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="product"></param>
+        /// 
+        public static void UpdateStatusLogic(CheqStoreContext ctx, Product product)
+        {
+            product.StatusLogic = !product.StatusLogic;
+            ctx.Entry(product).State = EntityState.Modified;
+            ctx.SaveChanges();
+        }
+
+        public static bool DeleteProduct(CheqStoreContext ctx,Product product) {
+
+            bool AnyProductInOrder = ctx.OrderDetails.Any(x=> x.ProductID == product.ProductID);
+
+            if (AnyProductInOrder) return false;
+
+            ctx.Entry(product).State = EntityState.Deleted;
+            ctx.SaveChanges();
+            return true;
         }
 
         /// <summary>

@@ -17,19 +17,19 @@
 }
 
 
-<table class="striped col s12 responsive-table highlight">
+<table class="col s12 responsive-table highlight">
     <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
             <th>Descripcion</th>
             <th>Precio</th>
+            <th>Estado Logico</th>
             <th>Stock</th>
             <th>Imagen </th>
             <th>Fecha de creacion </th>
             <th>Categoria </th>
             <th> Opciones </th>
-
 
         </tr>
     </thead>
@@ -39,11 +39,27 @@
         {
             string image = (string.IsNullOrEmpty(item.PathPhoto)) ? "/Assets/img/noImage.jpg" : "/Uploads/" + item.PathPhoto;
             string Categoria = (item.CategoryID != null) ? item.Category.Name : "Sin Categoria";
+            bool Status = item.StatusLogic;
             <tr>
                 <td>@item.ProductID</td>
                 <td>@item.Name</td>
                 <td>@item.Description</td>
                 <td>$@item.Price</td>
+                <td>
+                    @using (Html.BeginForm("ChangeStatusLogic", "ProductsAdmin", new { id = item.ProductID }, FormMethod.Post, null))
+                    {
+                        if (Status)
+                        {
+                            <button type="submit" class="waves-effect waves-light green darken-1 btn tooltipped center" id="@item.ProductID" data-position="top" data-delay="30" data-tooltip="Click para desactivar"><i class="material-icons">check_circle</i></button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@item.ProductID" data-position="top" data-delay="30" data-tooltip="Click para Activar"><i class="material-icons">remove_circle</i></button>
+                        }
+                    }
+
+                </td>
+
                 <td>                    
                     @if (item.Stock == 0)
                         { <strong>Sin stock disponible</strong>}
@@ -58,11 +74,12 @@
                 <td>@Categoria</td>
                 <td>
                     <a href="@Url.Action("Details","ProductsAdmin",new { id = item.ProductID})" class="waves-effect waves-light blue darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Detalle informativo del producto"><i class="material-icons">details</i></a>
-                    @using (Html.BeginForm("Delete", "ProductsAdmin",new { id = item.ProductID}, FormMethod.Post,null))
+              
+                    @using (Html.BeginForm("Delete", "ProductsAdmin", new { id = item.ProductID }, FormMethod.Post, null))
                     {
-                        <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@item.ProductID" data-position="top" data-delay="30" data-tooltip="Eliminar Producto"><i class="material-icons">delete_forever</i></button>
-                    }
+                        <button type="submit" class="waves-effect waves-light red darken-2 btn tooltipped center" id="@item.ProductID" data-position="top" data-delay="30" data-tooltip="Eliminar producto definitivamente"><i class="material-icons">delete_forever</i></button>
 
+                    }
                 </td>
 
             </tr>

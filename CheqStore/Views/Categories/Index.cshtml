@@ -4,37 +4,40 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
 }
+@Html.Partial("~/Views/Shared/Partials/Bread/Index.cshtml", "Categories")
+<a href="@Url.Action("Create","Categories")" class="waves-effect waves-light tooltipped green lighten-3 btn-large btn-text-icon right" data-position="top" data-delay="20" data-tooltip="Crear nuevo producto"> <strong>Nueva categoria </strong><i class="medium material-icons ">add_circle</i></a>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="bordered striped highlight responsive-table ">
     <tr>
+        <th>
+            ID
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th></th>
+     
+        <th> Opciones </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+          
+            <td>
+                <a href="@Url.Action("Details","Categories",new { id = item.CategoryID})" class="waves-effect waves-light blue darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Detalle informativo de la categoria"><i class="material-icons">details</i></a>
+                @using (Html.BeginForm("Delete", "Categories", new { id = item.CategoryID }, FormMethod.Post, null))
+                {
+                    <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@item.CategoryID" data-position="top" data-delay="30" data-tooltip="Eliminar categoria"><i class="material-icons">delete_forever</i></button>
+                }
+
+            </td>
+        </tr>
+    }
 
 </table>

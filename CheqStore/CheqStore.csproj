@@ -187,6 +187,7 @@
     <Compile Include="Data\Repositories\Products\RepositoryProduct.cs" />
     <Compile Include="Data\Repositories\Products\ValidationProduct.cs" />
     <Compile Include="Data\Repositories\Register\RegisterRepository.cs" />
+    <Compile Include="Data\Repositories\Users\UserRepository.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -313,7 +314,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\Repositories\Roles\" />
-    <Folder Include="Data\Repositories\Users\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>

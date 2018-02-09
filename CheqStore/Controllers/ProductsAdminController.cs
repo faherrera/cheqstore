@@ -125,25 +125,70 @@ namespace CheqStore.Controllers
             return View(product);
         }
 
-        // GET: ProductsAdmin/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public ActionResult ChangeStatusLogic(int? id)
         {
-            if (id == null)
+            try
             {
+                if (id == null)
+                {
 
-                TempData["Message"] = "Debe ingresar un ID valido de producto para editar";
+                    TempData["Message"] = "Debe ingresar un ID valido de producto para cambiar su estado";
+
+                    return RedirectToAction("Index");
+                }
+
+                Product product = ctx.Products.Find(id);
+
+                RepositoryProduct.UpdateStatusLogic(ctx,product); //Actualizo el borrado logico
+
+                TempData["Message"] = "Cambio de estado correcto";
 
                 return RedirectToAction("Index");
             }
 
-            Product product = ctx.Products.Find(id);
-
-            if (product == null)
+            catch (Exception e)
             {
-                return HttpNotFound();
+                TempData["Message"] = "Problema al cambiar estado -> " + e.Message;
+
+                return RedirectToAction("Index");
+            }
+          
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+
+                    TempData["Message"] = "Debe ingresar un ID valido de producto para eliminar";
+
+                    return RedirectToAction("Index");
+                }
+
+                Product product = ctx.Products.Find(id);
+
+                if (!RepositoryProduct.DeleteProduct(ctx, product))
+                {
+                    TempData["Message"] = "No puede eliminar un producto que ya fue pedido";
+
+                    return RedirectToAction("Index");
+                }
+
+                TempData["Message"] = "Eliminacion correcta";
+
+                return RedirectToAction("Index");
             }
 
-            return View(product);
+            catch (Exception e)
+            {
+                TempData["Message"] = "Problema al cambiar estado -> " + e.Message;
+
+                return RedirectToAction("Index");
+            }
+
         }
 
         protected override void Dispose(bool disposing)

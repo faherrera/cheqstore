@@ -17,7 +17,7 @@ namespace CheqStore.Models
         public int? Stock { get; set; }
         public string PathPhoto { get; set; }
         public Nullable<DateTime> CreatedAt { get; set; }
-
+        public bool StatusLogic { get; set; } // Para borrado logico
         [ForeignKey("Category")]
         public int? CategoryID { get; set; } //FK. Relacionada con Categories.
 
