@@ -13,14 +13,24 @@ namespace CheqStore.Data.Repositories.Auth
         static CheqStoreContext ctx = new CheqStoreContext();
         
 
-        public static bool busyUsername(string username)
+        public static bool busyUsername(string username, int userID = 0)
         {
-            return ctx.Users.Any(u => u.Username == username);
+            if (userID == 0) //Si no paso ninguno es porque estoy creando
+            {
+                return ctx.Users.Any(u => u.Username == username);
+
+            }
+            return ctx.Users.Any(u => u.Username == username && u.UserID != userID);
         }
 
-        public static bool busyEmail(string email)
+        public static bool busyEmail(string email, int userID = 0)
         {
-            return ctx.Users.Any(u => u.Email == email);
+            if (userID == 0) //Si no paso ninguno es porque estoy creando
+            {
+                return ctx.Users.Any(u => u.Email == email);
+
+            }
+            return ctx.Users.Any(u => u.Email == email && u.UserID != userID);
         }
 
         public static string EncryptingPassword(string password)

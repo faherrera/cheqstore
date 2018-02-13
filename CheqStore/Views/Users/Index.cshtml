@@ -8,6 +8,9 @@
 @Html.Partial("~/Views/Shared/Partials/Bread/Index.cshtml", "Users")
 <a href="@Url.Action("Create","Users")" class="waves-effect waves-light tooltipped green lighten-3 btn-large btn-text-icon right" data-position="top" data-delay="20" data-tooltip="Crear nuevo usuario"> <strong>Nuevo Usuario</strong><i class="medium material-icons ">add_circle</i></a>
 
+
+@Html.Partial("~/Views/Shared/Partials/Messages/General.cshtml", null, new ViewDataDictionary { { "Message", ViewBag.Message} })
+
 <table class="bordered striped highlight responsive-table ">
     <thead>
         <tr>
@@ -16,6 +19,7 @@
             <th>@Html.DisplayNameFor(model => model.Username)</th>
             <th>@Html.DisplayNameFor(model => model.Email)</th>
             <th>@Html.DisplayNameFor(model => model.Rol)</th>
+            <th>Estado Logico</th>
             <th>Opciones</th>
         </tr>
     </thead>
@@ -23,6 +27,8 @@
     <tbody>
       @foreach (var item in Model)
       {
+          bool Status = item.StatusLogic;
+
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.UserID)
@@ -40,6 +46,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Rol)
             </td>
+            <td>
+                @using (Html.BeginForm("ChangeStatusLogic", "Users", new { id = item.UserID }, FormMethod.Post, null))
+                {
+                    if (Status)
+                    {
+                        <button type="submit" class="waves-effect waves-light green darken-1 btn tooltipped center" id="@item.UserID" data-position="top" data-delay="30" data-tooltip="Click para desactivar"><i class="material-icons">check_circle</i></button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@item.UserID" data-position="top" data-delay="30" data-tooltip="Click para Activar"><i class="material-icons">remove_circle</i></button>
+                    }
+                }
+
+            </td>
+
             <td>
                 <a href="@Url.Action("Details","Users",new { id = item.UserID})" class="waves-effect waves-light blue darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Detalle informativo del usuario"><i class="material-icons">details</i></a>
                 @using (Html.BeginForm("Delete", "Users", new { id = item.UserID }, FormMethod.Post, null))

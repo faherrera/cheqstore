@@ -8,7 +8,7 @@ namespace CheqStore.Models
 {
     public enum Rol
     {
-        Admin,Cliente
+        Admin,Cliente,SuperAdmin
     }
 
     public class User
@@ -16,13 +16,21 @@ namespace CheqStore.Models
         [Key]
         public int UserID { get; set; }
         public string Name { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public DateTime CreatedAt { get; set; }
 
+        [Required]
+        [MaxLength(12)]
+        [MinLength(3)]
+        public string Username { get; set; }
+        
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+
+        [Required]
         public Rol Rol { get; set; } = Rol.Cliente;
-       
+
+        public bool StatusLogic { get; set; } = true;
+
         public ICollection<Order> Orders { get; set; }
 
     }

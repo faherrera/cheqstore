@@ -27,7 +27,6 @@ namespace CheqStore.Data.Repositories.Register
                     Name = registerRequest.Name,
                     Username = registerRequest.Username,
                     Password = CredentialsRepository.EncryptingPassword(registerRequest.Password),
-                    CreatedAt = DateTime.Now,
                 };
 
                 ctx.Users.Add(userEntity);

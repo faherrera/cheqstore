@@ -9,10 +9,12 @@ using System.Web.Mvc;
 using CheqStore.DAL;
 using CheqStore.Models;
 using CheqStore.Filters;
+using CheqStore.Data.Repositories.Users;
+using CheqStore.Data.Repositories.Auth;
 
 namespace CheqStore.Controllers
 {
-    //[CustomAuthorize("Admin")]
+    [CustomAuthorize("Admin","SuperAdmin")]
     public class UsersController : Controller
     {
         private CheqStoreContext db = new CheqStoreContext();
@@ -20,7 +22,28 @@ namespace CheqStore.Controllers
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            if (!string.IsNullOrEmpty(TempData["Message"] as string))
+            {
+                ViewBag.Message = TempData["Message"] as string;
+                TempData.Remove("Message");
+            }
+
+            int userID =Convert.ToInt32(Session["UserID"]);
+            User user = db.Users.FirstOrDefault(u => u.UserID ==  userID);
+
+            if (user != null)
+            {
+                if (user.Rol.ToString() == "Admin")
+                {
+                    return View(db.Users.Where(x => x.Rol.ToString() == "Cliente").ToList());
+
+                }
+
+                return View(db.Users.Where(x => x.Rol.ToString() != "SuperAdmin").ToList());
+
+            }
+
+            return RedirectToAction("Login", "Login");
         }
 
         // GET: Users/Details/5
@@ -53,16 +76,43 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Name,Username,Email,Password,PathPhoto,CreatedAt,Rol")] User user)
+        public ActionResult Create( User user)
         {
-            if (ModelState.IsValid)
+            
+            try
             {
-                db.Users.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (!ModelState.IsValid)
+                {
+                    return View(user);
+                }
 
-            return View(user);
+                if (CredentialsRepository.busyUsername(user.Username))
+                {
+                    ModelState.AddModelError("Username", "El usuario ya está ocupado, intente otro por favor.");
+                    return View(user);
+
+                }
+
+                if (CredentialsRepository.busyEmail(user.Email))
+                {
+                    ModelState.AddModelError("Email", "El Email ya está ocupado, intente otro por favor.");
+                                        return View(user);
+
+                }
+
+              
+                UserRepository.StoreUser(user);
+                TempData["Message"] = string.Format(" {0} creado correctamente ", user.Username);
+                return RedirectToAction("Index");
+
+
+            }
+            catch (Exception e)
+            {
+                TempData["Message"] = string.Format(" Ocurrio el error -> {0} || intente nuevamente", e.Message);
+                return RedirectToAction("Index");
+            }          
+
         }
 
         // GET: Users/Edit/5
@@ -85,41 +135,108 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserID,Name,Username,Email,Password,PathPhoto,CreatedAt,Rol")] User user)
+        public ActionResult Edit( User user)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
+                if (!ModelState.IsValid)
+                {
+                    return View(user);
+                }
+
+                if (CredentialsRepository.busyUsername(user.Username,user.UserID))
+                {
+                    ModelState.AddModelError("Username", "El usuario ya está ocupado, intente otro por favor.");
+                    return View(user);
+                }
+
+                if (CredentialsRepository.busyEmail(user.Email, user.UserID))
+                {
+                    ModelState.AddModelError("Email", "El Email ya está ocupado, intente otro por favor.");
+                    return View(user);
+
+                }
+
+                UserRepository.UpdateUser(user);
+                TempData["Message"] = string.Format(" {0} editado correctamente ", user.Username);
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception e)
+            {
+                TempData["Message"] = string.Format(" Ocurrio el error -> {0} || intente nuevamente", e.Message);
                 return RedirectToAction("Index");
             }
-            return View(user);
         }
 
-        // GET: Users/Delete/5
+        [HttpPost]
+        public ActionResult ChangeStatusLogic(int? id)
+        {
+            CheqStoreContext ctx = new CheqStoreContext();
+
+            try
+            {
+                if (id == null)
+                {
+
+                    TempData["Message"] = "Debe ingresar un ID valido de User para cambiar su estado";
+
+                    return RedirectToAction("Index");
+                }
+
+                User user = ctx.Users.Find(id);
+
+                UserRepository.UpdateStatusLogic(user); //Actualizo el borrado logico
+
+                TempData["Message"] = "Cambio de estado correcto";
+
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception e)
+            {
+                TempData["Message"] = "Problema al cambiar estado -> " + e.Message;
+
+                return RedirectToAction("Index");
+            }
+
+        }
+
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+            CheqStoreContext ctx = new CheqStoreContext();
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.Users.Find(id);
-            db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                if (id == null)
+                {
+
+                    TempData["Message"] = "Debe ingresar un ID valido de user para eliminar";
+
+                    return RedirectToAction("Index");
+                }
+
+                User user = ctx.Users.Find(id);
+
+                if (!UserRepository.DeleteUser( user))
+                {
+                    TempData["Message"] = "No puede eliminar un user que ya tenga ordenes pedidas.";
+
+                    return RedirectToAction("Index");
+                }
+
+                TempData["Message"] = "Eliminacion correcta";
+
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception e)
+            {
+                TempData["Message"] = "Problema al cambiar estado -> " + e.Message;
+
+                return RedirectToAction("Index");
+            }
+
         }
 
         protected override void Dispose(bool disposing)

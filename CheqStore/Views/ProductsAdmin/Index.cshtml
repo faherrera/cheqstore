@@ -7,14 +7,8 @@
 @Html.Partial("~/Views/Shared/Partials/Bread/Index.cshtml", "ProductsAdmin")
 <a href="@Url.Action("Create","ProductsAdmin")" class="waves-effect waves-light tooltipped green lighten-3 btn-large btn-text-icon right" data-position="top" data-delay="20" data-tooltip="Crear nuevo producto"> <strong>Nuevo producto</strong><i class="medium material-icons ">add_circle</i></a>
 
-@if (ViewBag.Message != null)
-{
-    <div class="col s12 blue-grey lighten-1 center-align">
-        <p>
-            @ViewBag.Message
-        </p>
-    </div>
-}
+@Html.Partial("~/Views/Shared/Partials/Messages/General.cshtml", null, new ViewDataDictionary { { "Message", ViewBag.Message } })
+
 
 
 <table class="col s12 responsive-table highlight">
