@@ -8,9 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using CheqStore.DAL;
 using CheqStore.Models;
+using CheqStore.Filters;
+using CheqStore.Data.Repositories.Categories;
 
 namespace CheqStore.Controllers
 {
+    [CustomAuthorize("Admin", "SuperAdmin")]
     public class CategoriesController : Controller
     {
         private CheqStoreContext db = new CheqStoreContext();
@@ -18,6 +21,12 @@ namespace CheqStore.Controllers
         // GET: Categories
         public ActionResult Index()
         {
+            if (!string.IsNullOrEmpty(TempData["Message"] as string))
+            {
+                ViewBag.Message = TempData["Message"] as string;
+                TempData["Message"] = null;
+
+            }
             return View(db.Categories.ToList());
         }
 
@@ -47,11 +56,10 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,Name,CreatedAt")] Category category)
+        public ActionResult Create( Category category)
         {
             if (ModelState.IsValid)
             {
-                category.CreatedAt = DateTime.Now;
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -65,12 +73,17 @@ namespace CheqStore.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["Message"] = "Debe ingresar un ID valido de categoria para editar";
+
+                return RedirectToAction("Index");
             }
             Category category = db.Categories.Find(id);
+
             if (category == null)
             {
-                return HttpNotFound();
+                TempData["Message"] = "Debe ingresar un ID valido de categoria existe para editar";
+
+                return RedirectToAction("Index");
             }
             return View(category);
         }
@@ -80,42 +93,94 @@ namespace CheqStore.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,Name,CreatedAt")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
+                
+                if (db.Categories.Any(x=> x.Name == category.Name && x.CategoryID != category.CategoryID))
+                {
+                    TempData["Message"] = "No puede repetir el nombre en cheqstore";
+
+                    return RedirectToAction("Index");
+                }
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(category);
         }
+        [HttpPost]
+        public ActionResult ChangeStatusLogic(int? id)
+        {
+            try
+            {
+                if (id == null)
+                {
 
-        // GET: Categories/Delete/5
+                    TempData["Message"] = "Debe ingresar un ID valido de categoria para cambiar su estado";
+
+                    return RedirectToAction("Index");
+                }
+
+                Category category = db.Categories.Find(id);
+
+                RepositoryCategories.UpdateStatusLogic(category); //Actualizo el borrado logico
+
+                TempData["Message"] = "Cambio de estado correcto";
+
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception e)
+            {
+                TempData["Message"] = "Problema al cambiar estado -> " + e.Message;
+
+                return RedirectToAction("Index");
+            }
+
+        }
+
+
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            using (db = new CheqStoreContext())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                try
+                {
+                    if (id == null)
+                    {
+
+                        TempData["Message"] = "Debe ingresar un ID valido de Categoria para eliminar";
+
+                        return RedirectToAction("Index");
+                    }
+
+                    Category category = db.Categories.Find(id);
+
+                    if (!RepositoryCategories.DeleteCategory(category))
+                    {
+                        TempData["Message"] = "No puede eliminar una categoria con productos, debe eliminar o cambiar de categoria antes los productos dependientes";
+
+                        return RedirectToAction("Index");
+                    }
+
+                    TempData["Message"] = "Eliminacion correcta";
+
+                    return RedirectToAction("Index");
+                }
+
+                catch (Exception e)
+                {
+                    TempData["Message"] = "Problema al cambiar estado -> " + e.Message;
+
+                    return RedirectToAction("Index");
+                }
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
-            {
-                return HttpNotFound();
-            }
-            return View(category);
+
         }
 
-        // POST: Categories/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

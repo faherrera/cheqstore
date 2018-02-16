@@ -156,6 +156,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -212,6 +213,7 @@
     <Content Include="Assets\css\layouts\adminlayout.css" />
     <Content Include="Assets\css\layouts\general.css" />
     <Content Include="Assets\css\base.css" />
+    <Content Include="Assets\css\layouts\homelayout.css" />
     <Content Include="Assets\css\layouts\nonav.css" />
     <Content Include="Assets\css\material-icons.css" />
     <Content Include="Assets\css\styles.css" />
@@ -311,6 +313,10 @@
     <Content Include="Views\ProductsAdmin\Create.cshtml" />
     <Content Include="Views\ProductsAdmin\Edit.cshtml" />
     <Content Include="Views\Shared\Partials\Messages\General.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Shared\Layouts\_layoutHome.cshtml" />
+    <Content Include="Views\Shared\Layouts\Admin\Partial\NavAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,6 +7,8 @@
 @Html.Partial("~/Views/Shared/Partials/Bread/Index.cshtml", "Categories")
 <a href="@Url.Action("Create","Categories")" class="waves-effect waves-light tooltipped green lighten-3 btn-large btn-text-icon right" data-position="top" data-delay="20" data-tooltip="Crear nuevo producto"> <strong>Nueva categoria </strong><i class="medium material-icons ">add_circle</i></a>
 
+@Html.Partial("~/Views/Shared/Partials/Messages/General.cshtml", null, new ViewDataDictionary { { "Message", ViewBag.Message } })
+
 <table class="bordered striped highlight responsive-table ">
     <tr>
         <th>
@@ -15,7 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
-     
+        <th>
+            Estado Logico
+        </th>
         <th> Opciones </th>
     </tr>
 
@@ -28,7 +32,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-          
+            <td>
+                @using (Html.BeginForm("ChangeStatusLogic", "Categories", new { id = item.CategoryID }, FormMethod.Post, null))
+                {
+                    if (item.StatusLogic)
+                    {
+                        <button type="submit" class="waves-effect waves-light green darken-1 btn tooltipped center" id="@item.CategoryID" data-position="top" data-delay="30" data-tooltip="Click para desactivar"><i class="material-icons">check_circle</i></button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@item.CategoryID" data-position="top" data-delay="30" data-tooltip="Click para Activar"><i class="material-icons">remove_circle</i></button>
+                    }
+                }
+
+            </td>
+
             <td>
                 <a href="@Url.Action("Details","Categories",new { id = item.CategoryID})" class="waves-effect waves-light blue darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Detalle informativo de la categoria"><i class="material-icons">details</i></a>
                 @using (Html.BeginForm("Delete", "Categories", new { id = item.CategoryID }, FormMethod.Post, null))

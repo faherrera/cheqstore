@@ -45,8 +45,10 @@ namespace CheqStore.Data.Repositories.Auth
 
         public static void CreateSession(string Username)
         {
+            var User = ctx.Users.First(u => u.Username == Username);
             HttpContext.Current.Session["Username"] = Username;
-            HttpContext.Current.Session["UserID"] = ctx.Users.First(u => u.Username == Username).UserID;
+            HttpContext.Current.Session["UserID"] = User.UserID;
+            HttpContext.Current.Session["Rol"] = User.Rol;
 
         }
 

@@ -26,14 +26,6 @@
         </div>
 
        
-        <div class="row hide">
-            @Html.LabelFor(model => model.CreatedAt)
-            <div class="input-field col s12">
-                    @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new {  @class = "validate" } })
-                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

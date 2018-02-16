@@ -35,7 +35,7 @@ namespace CheqStore.Controllers
                 return RedirectToAction("Index", "OrderView");
             }
 
-            return View("Index");
+            return RedirectToAction("Index","Account");
         }
 
         // GET: OrderDetails/Edit/5

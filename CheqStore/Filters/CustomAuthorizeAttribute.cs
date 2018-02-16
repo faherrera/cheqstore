@@ -39,7 +39,7 @@ namespace CheqStore.Filters
 
                 }else
                 {
-                    if (ctx.Users.Any(x => x.Username == username && x.Rol == rol || x.Rol == rol2) )
+                    if (ctx.Users.Any(x => x.Username == username && x.Rol == rol) || ctx.Users.Any(x => x.Username == username && x.Rol == rol2))
                     {
                         authorize = true;
                     }
@@ -52,9 +52,18 @@ namespace CheqStore.Filters
             {
 
                 base.OnAuthorization(filterContext);
-                
+
                 //hacer un Switch, en caso de que se solicite admin enviar a un Admin/login en caso de cliente a /login al igual que default
-                filterContext.RequestContext.HttpContext.Response.Redirect("/Login", true);
+
+                if (this.rol.ToString().ToUpper() != "CLIENTE")
+                {
+                    filterContext.RequestContext.HttpContext.Response.Redirect("/Admin/Login", true);
+
+                }else
+                {
+
+                    filterContext.RequestContext.HttpContext.Response.Redirect("/Login", true);
+                }
             }
         }
 

@@ -17,63 +17,7 @@
 <body>
     <header>
 
-        <nav class="white">
-            <div class="nav-wrapper">
-                <a href="/Admin" class="brand-logo indigo-text text-lighten-1 " >Dashboard </a>
-                <a href="#" data-activates="slide-out" class="button-collapse black-text"><i class="material-icons">menu</i></a>
-                <ul id="slide-out" class="side-nav">
-                    <li>
-                        <div class="dashboard-aside__image-container blue darken-3">
-                            <img src="~/Assets/img/admin.png" alt="Img Admin" class="circle img-responsive" />
-                            <strong class="white-text"> Administrador </strong>
-                        </div>
-                    </li>
-
-                    <ul class="collapsible black-text" data-collapsible="accordion">
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
-                            <div class="collapsible-body">
-                                <ul class="collection">
-                                    <li class="collection-item">
-                                        <a href="#!">Alvin</a>
-                                    </li>
-                                    <li class="collection-item">
-                                        <a href="#!">Alvin</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-                            <div class="collapsible-body">
-                                <ul class="collection">
-                                    <li class="collection-item">
-                                        <a href="#!">Alvin</a>
-                                    </li>
-                                    <li class="collection-item">
-                                        <a href="#!">Alvin</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        <li>
-                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-                            <div class="collapsible-body">
-                                <ul class="collection">
-                                    <li class="collection-item">
-                                        <a href="#!">Alvin</a>
-                                    </li>
-                                    <li class="collection-item">
-                                        <a href="#!">Alvin</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </ul>
-
-            </div>
-        </nav>
-
+        @Html.Partial("~/Views/Shared/Layouts/Admin/Partial/NavAdmin.cshtml")
     </header>
     <main role="main">
         <div class="row" style="margin: 0">

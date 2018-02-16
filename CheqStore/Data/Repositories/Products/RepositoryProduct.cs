@@ -21,7 +21,7 @@ namespace CheqStore.Data.Repositories.Products
         {
             ctx = new CheqStoreContext();
 
-            if (!ctx.Products.Any(c=> c.Category.Name == Category) || string.IsNullOrEmpty(Category))
+            if (!ctx.Categories.Any(c=> c.Name == Category) || string.IsNullOrEmpty(Category))
             {
                 return ctx.Products.Where(p=> p.StatusLogic == true && p.Stock > 0).ToList();
             }

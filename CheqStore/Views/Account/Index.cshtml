@@ -1,0 +1,93 @@
+﻿@model IEnumerable<CheqStore.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
+
+    var OrdersConfirmed = Model.Where(x => x.Status == true).ToList();
+    var OrdersPending = Model.Where(x => x.Status == false).ToList();
+
+}
+
+<h2>Cuenta personal</h2>
+
+@Html.Partial("~/Views/Shared/Partials/Messages/General.cshtml", null, new ViewDataDictionary { { "Message", ViewBag.Message } })
+
+<h4 class="green lighten-3 center"> Ordenes con pago Confirmado </h4>
+
+@if (OrdersConfirmed.Count() > 0)
+{
+    <table class="responsive-table striped green lighten-3">
+        <thead>
+            <tr>
+                <th>Fecha de pedido</th>
+                <th>Fecha de confirmacion</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                @foreach (var item in OrdersConfirmed)
+                {
+                    <td>@item.OrderDate</td>
+                    <td>@item.ConfirmedDate</td>
+                    <td>@item.Total</td>
+                }
+            </tr>
+      
+        </tbody>
+    </table>
+}else
+{
+<ul class="collection">
+    <li class="collection-item red lighten-3"> Sin ordenes pendientes aún! </li>
+</ul>
+}
+
+
+<hr />
+
+<h3 class="yellow lighten-3 center"> Ordenes con pago pendiente </h3>
+
+@if (OrdersPending.Count() > 0)
+{
+    <table class="responsive-table striped yellow lighten-3">
+        <thead>
+            <tr>
+                <th>Fecha de pedido</th>
+                <th>Fecha de confirmacion</th>
+                <th>Total</th>
+                <th>Opciones</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+         
+                    @foreach (var item in OrdersPending)
+                    {
+                        <td>@item.OrderDate</td>
+                        <td>@item.ConfirmedDate</td>
+                        <td>@item.Total</td>
+                        <td>
+                            @using (Html.BeginForm("CancelOrder", "Account", new { id = @item.ID }, FormMethod.Post, null))
+                            {
+                                <button class="btn red lighten-3"> Cancelar orden </button>
+                            }     
+                        </td>
+
+                    }
+               
+            </tr>
+
+        </tbody>
+    </table>
+}
+else
+{
+    <ul class="collection">
+        <li class="collection-item red lighten-3"> Sin ordenes pendientes aún! </li>
+    </ul>
+}

@@ -5,15 +5,8 @@
     decimal Total = 0;
 }
 
-@if (ViewBag.Message != null)
-{
-    <div class="col s12 teal white-text">
-        <strong> Mensaje: </strong>
-        <p>
-            @ViewBag.Message
-        </p>
-    </div>
-}
+@Html.Partial("~/Views/Shared/Partials/Messages/General.cshtml", null, new ViewDataDictionary { { "Message", ViewBag.Message } })
+
 
 <h2>Tu orden de compra </h2>
 
@@ -62,7 +55,7 @@ else
                             @using (Html.BeginForm("RemoveProduct", "OrderView", FormMethod.Post,null))
                             {     
                             <input id="ProductID" class="hide" name="ProductID" value=@item.ProductID />
-                            <button  type="submit"  class="btn waves-effect red accent-2">Restar</button>
+                            <button  type="submit"  class="btn waves-effect yellow darken-4">Restar producto</button>
                             }
                         </td>
 
@@ -77,6 +70,7 @@ else
                 <td> </td>
                 <td>@Total</td>
                 <td>
+
                     @using (Html.BeginForm("Create", "OrderDetails", FormMethod.Post, null))
                     {
                     <button type="submit" class="btn waves-effect waves-blue"> <i class="material-icons right">payment</i>Comprar </button>
@@ -91,6 +85,12 @@ else
         
         </tbody>
     </table>
+<hr />
 
-   
+using (Html.BeginForm("CancelOrder", "OrderView", FormMethod.Post, null))
+{
+    <button type="submit" class="btn btn-large waves-effect waves-red red darken-2 right "> <i class="material-icons right">remove</i> Cancelar Orden </button>
+}
+
+
 }

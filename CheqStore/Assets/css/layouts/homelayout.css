@@ -1,0 +1,33 @@
+﻿main{
+    background:white;
+    display:flex;
+       padding: 0;
+    margin:0;
+
+}
+
+.carousel{
+    flex: 1;
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin:0;
+}
+
+
+.cover {
+    background-color: #d1ccc0;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;   
+}
+
+.cover--first{
+    background-image: no-repeat center center fixed; 
+    background-image: url('../../img/store.jpg');
+}
+
+.cover--second{
+   background-image: no-repeat center center fixed; 
+    background-image: url('../../img/river-store.jpg');}

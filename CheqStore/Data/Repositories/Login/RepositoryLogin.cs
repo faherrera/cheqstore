@@ -23,8 +23,9 @@ namespace CheqStore.Data.Repositories.Login
         {
             if (loginClass == null) return responseEntity = new ResponseEntity() { status = false,message = "El login no puede ser nulo" };
 
-            //Here I compare the credentials
-            var credentials = ctx.Users.FirstOrDefault(x => x.Username == loginClass.Username && x.Password == loginClass.Password);
+            //Here I compare the credentials with encrypting password
+            string EncryptingPassword = CredentialsRepository.EncryptingPassword(loginClass.Password); 
+            var credentials = ctx.Users.FirstOrDefault(x => x.Username == loginClass.Username && x.Password == EncryptingPassword);
 
             if (credentials == null) return responseEntity = new ResponseEntity() { status = false, message = "Los datos no coinciden, por favor revisar" };
 

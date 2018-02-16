@@ -1,0 +1,71 @@
+﻿
+
+<nav class="white">
+    <div class="nav-wrapper">
+        <a href="/Admin" class="brand-logo indigo-text text-lighten-1 ">Dashboard </a>
+        <a href="#" data-activates="slide-out" class="button-collapse black-text"><i class="material-icons">menu</i></a>
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <div class="dashboard-aside__image-container blue darken-3">
+                    <img src="~/Assets/img/admin.png" alt="Img Admin" class="circle img-responsive" />
+                    <h4 class="white-text"> @Session["Username"]  </h4>
+                    <strong class="white-text"> @Session["Rol"]  </strong>
+                </div>
+            </li>
+
+            <ul class="collapsible black-text" data-collapsible="accordion">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">filter_drama</i>Usuarios</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <a href="@Url.Action("Create","Users")">Crear usuarios</a>
+                            </li>
+                            <li class="collection-item">
+                                <a href="@Url.Action("Index","Users")">Listar usuarios</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">place</i>Productos</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <a href="@Url.Action("Create","ProductsAdmin")">Crear Productos</a>
+                            </li>
+                            <li class="collection-item">
+                                <a href="@Url.Action("Index","ProductsAdmin")">Listar Products</a>
+                            </li>
+                        </ul>
+                    </div>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">whatshot</i>Categorias</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <a href="@Url.Action("Create","Categories")">Crear Categorias</a>
+                            </li>
+                            <li class="collection-item">
+                                <a href="@Url.Action("Index","Categories")">Listar Categorias</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">place</i>Ordenes</div>
+                    <div class="collapsible-body">
+                        <ul class="collection">
+                            <li class="collection-item">
+                                <a href="@Url.Action("Index","Orders")"> Listar Ordenes</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="@Url.Action("Logout","Login")"> Cerrar Sesion <i class="material-icons">exit_to_app</i></a></li>
+            </ul>
+        </ul>
+
+    </div>
+</nav>

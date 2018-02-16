@@ -1,5 +1,6 @@
 ﻿using CheqStore.DAL;
 using CheqStore.Data.Repositories.Products;
+using CheqStore.Filters;
 using CheqStore.Models;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace CheqStore.Controllers
 {
+    [CustomAuthorize("Admin","SuperAdmin")]
     public class ProductsAdminController : Controller
     {
         private CheqStoreContext ctx = new CheqStoreContext();

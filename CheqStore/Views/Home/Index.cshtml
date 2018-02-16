@@ -1,11 +1,24 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    Layout = "~/Views/Shared/Layouts/General/_Layout1.cshtml";
+    Layout = "~/Views/Shared/Layouts/_layoutHome.cshtml";
 }
 
 
-<div>
-    <h1>
-        Bienvenidos! ChequerStore
-    </h1>
+<div class="carousel carousel-slider" data-indicators="true">
+    <div class="carousel-fixed-item center">
+        <a href="@Url.Action("Index","Products")" class="btn waves-effect  black white-text">Ingresar a CheqStore</a>
+    </div>
+  
+    <div class="carousel-item green white-text center cover cover--first" href="#three!">
+        <h2>CheqStore</h2>
+    </div>
+    <div class="carousel-item blue white-text center cover cover--second" href="#four!">
+        <h2>CheqStore</h2>
+    </div>
 </div>
+
+@section scripts{
+    <script>
+        $('.carousel.carousel-slider').carousel({ fullWidth: true });
+    </script>
+} 

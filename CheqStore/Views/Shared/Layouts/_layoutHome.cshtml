@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Chequer Store - </title>
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Assets/css/material-icons.css" rel="stylesheet" />
+    <link href="~/Assets/css/materialize.min.css" rel="stylesheet" />
+    <link href="~/Assets/css/base.css" rel="stylesheet" />
+    <link href="~/Assets/css/layouts/homelayout.css" rel="stylesheet" />
+</head>
+<body>
+    <main>
+        @RenderBody();
+    </main>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Assets/js/materialize.min.js"></script>
+    <script src="~/Assets/js/master.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

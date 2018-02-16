@@ -11,9 +11,9 @@ namespace CheqStore.Models
     {
         [Key]
         public int CategoryID { get; set; }
+        [Required]
         public string Name { get; set; }
-        public DateTime CreatedAt { get; set; }
-
+        public bool StatusLogic { get; set; }
         public ICollection<Product> Products { get; set; } 
     }
 }

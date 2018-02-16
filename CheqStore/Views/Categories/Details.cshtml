@@ -5,31 +5,51 @@
     Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
+@Html.Partial("~/Views/Shared/Partials/Bread/Detail.cshtml", "Categories")
 
-<div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+<h2>Detalles</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+<div class="card ">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
+    <div class="card-content">
+        <span class="card-title"> Informacion de la categoria</span>
+        <br />
+        <ul class="collection ">
+            <li class="collection-item valign-wrapper">
+                <i class="material-icons">face</i> <strong> Nombre de la categoria: </strong> <em> @Model.Name</em>
+            </li>
+         
+            <li class="collection-item valign-wrapper">
+                <i class="material-icons">bookmark</i>
+                <strong> Borrado logico:  * </strong>
+                <p>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
+                    @using (Html.BeginForm("ChangeStatusLogic", "Categories", new { id = Model.CategoryID }, FormMethod.Post, null))
+                    {
+                        if (Model.StatusLogic)
+                        {
+                            <button type="submit" class="waves-effect waves-light green darken-1 btn tooltipped center" id="@Model.CategoryID" data-position="top" data-delay="30" data-tooltip="Click para desactivar"><i class="material-icons">check_circle</i></button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="waves-effect waves-light red darken-1 btn tooltipped center" id="@Model.CategoryID" data-position="top" data-delay="30" data-tooltip="Click para Activar"><i class="material-icons">remove_circle</i></button>
+                        }
+                    }
+                </p>
 
-    </dl>
+            </li>
+
+        </ul>
+    </div>
+    <div class="card-action right-align">
+        <a href="@Url.Action("Edit","Categories",new { id = Model.CategoryID})" class="waves-effect waves-light blue darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Editar categoria"><i class="material-icons">edit</i>Editar</a>
+
+        @using (Html.BeginForm("Delete", "Categories", new { id = Model.CategoryID }, FormMethod.Post, null))
+        {
+
+            <button class="waves-effect waves-light red darken-1 btn tooltipped center" data-position="top" data-delay="30" data-tooltip="Eliminar categoria"><i class="material-icons">delete_forever</i> Borrar categoria definitivamente </button>
+
+        }
+
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

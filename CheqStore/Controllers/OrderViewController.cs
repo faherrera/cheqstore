@@ -98,5 +98,22 @@ namespace CheqStore.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult CancelOrder()
+        {
+            try
+            {
+                OrderViewRepository.OrderViewSessionEmpty();
+                TempData["Message"] = "Orden cancelada correctamente";
+                return RedirectToAction("Index","Products");
+            }
+            catch (Exception e)
+            {
+                TempData["Message"] = "No pudimos cancelar la orden, el error fue,  ->   " + e.Message;
+
+                return RedirectToAction("Index");
+            }
+        } 
+
     }
 }
