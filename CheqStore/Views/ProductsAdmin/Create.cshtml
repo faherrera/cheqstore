@@ -4,8 +4,11 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
 
-    bool IsGreater = (ViewBag.CategoryID.Count > 0 ) ? true : false;
+    bool IsGreater = (ViewBag.CategoryID != null) ? (ViewBag.CategoryID.Count > 0 ? true : false) : false;
 }
+
+@Html.Partial("~/Views/Shared/Partials/Messages/General.cshtml", null, new ViewDataDictionary { { "Message", ViewBag.Message } })
+
 
 <h2>Create</h2>
 
@@ -37,7 +40,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" , required = "true" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -86,7 +89,7 @@
                     </div>
 
                     <div class="col s12 m4">
-                        <a href="@Url.Action("Create","Categories")" class="btn-large blue lighten-2 btn-text-icon" id="AddCategoryModal"> Agregar nueva Categoria <i class="material-icons">add_circle</i></a>
+                        <a href="@Url.Action("Create","Categories")" class="btn-large blue lighten-2 " id="AddCategoryModal"> <strong>Agregar nueva Categoria </strong></a>
                     </div>
                 }
                 else
@@ -104,9 +107,10 @@
         @if (IsGreater)
         {
             <input type="submit" value="Create" class="btn" />
-        }else
+        }
+        else
         {
-          <a href="#!" class="btn yellow lighten-2" > No puede crear hasta que no tenga alguna categoria cargada</a>
+            <a href="@Url.Action("Create","Categories")" class="btn-large blue lighten-2 " id="AddCategoryModal"> <strong>Agregar nueva Categoria </strong></a>
         }
 
 

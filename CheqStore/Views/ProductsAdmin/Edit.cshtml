@@ -4,6 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/Layouts/Admin/AdminLayout.cshtml";
     string image = (string.IsNullOrEmpty(Model.PathPhoto)) ? "http://www.bitaccora.com/images/portal/web/imagenblanco.jpg" : "/Uploads/" + @Model.PathPhoto;
+    string Categoria = Model.Category != null ? Model.Category.Name : "Sin categoria";
 }
 
 <h2>Edit</h2>
@@ -69,7 +70,7 @@
 
         <div class="input-field">
             <select name="CategoryID">
-                <option value="@Model.CategoryID" selected> @Model.Category.Name</option>
+                <option value="@Model.CategoryID" selected> @Categoria</option>
                 @foreach (var item in ViewBag.CategoryID)
                 {
                     if (item.CategoryID != Model.CategoryID)

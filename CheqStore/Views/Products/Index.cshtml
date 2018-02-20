@@ -52,7 +52,7 @@
                 {
 
                     string image = (string.IsNullOrEmpty(item.PathPhoto)) ? "http://www.bitaccora.com/images/portal/web/imagenblanco.jpg" : "/Uploads/" + item.PathPhoto;
-                    string Categoria = (item.CategoryID != null) ? item.Category.Name : "Sin Categoria";
+                    string Categoria = (item.CategoryID != null) ? item.Category.Name : "_";
 
                     using (Html.BeginForm("AddProduct", "OrderView", FormMethod.Post, new { @class = "col s12 m4" }))
                     {

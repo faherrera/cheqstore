@@ -21,3 +21,8 @@ strong{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.field-validation-error{
+    background:coral;
+    padding: .2rem;
+}

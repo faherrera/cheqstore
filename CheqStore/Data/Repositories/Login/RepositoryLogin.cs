@@ -2,6 +2,7 @@
 using CheqStore.Data.ModelNotMapped.BaseEntity;
 using CheqStore.Data.ModelNotMapped.Login;
 using CheqStore.Data.Repositories.Auth;
+using CheqStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,13 +20,25 @@ namespace CheqStore.Data.Repositories.Login
         /// </summary>
         /// <param name="loginClass"></param>
         /// <returns> string</returns>
-        public static ResponseEntity ProccessingLogin( LoginClass loginClass)
+        public static ResponseEntity ProccessingLogin( LoginClass loginClass,string rol = "Cliente")
         {
             if (loginClass == null) return responseEntity = new ResponseEntity() { status = false,message = "El login no puede ser nulo" };
 
             //Here I compare the credentials with encrypting password
-            string EncryptingPassword = CredentialsRepository.EncryptingPassword(loginClass.Password); 
-            var credentials = ctx.Users.FirstOrDefault(x => x.Username == loginClass.Username && x.Password == EncryptingPassword);
+            string EncryptingPassword = CredentialsRepository.EncryptingPassword(loginClass.Password);
+
+            User credentials;
+
+            if (rol == "Cliente")
+            {
+                 credentials = ctx.Users.FirstOrDefault(x => x.Username == loginClass.Username && x.Password == EncryptingPassword && x.Rol.ToString() == rol);
+
+            }
+            else
+            {
+                credentials = ctx.Users.FirstOrDefault(x => x.Username == loginClass.Username && x.Password == EncryptingPassword && x.Rol.ToString() != "Cliente");
+
+            }
 
             if (credentials == null) return responseEntity = new ResponseEntity() { status = false, message = "Los datos no coinciden, por favor revisar" };
 

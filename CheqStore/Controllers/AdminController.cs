@@ -33,7 +33,7 @@ namespace CheqStore.Controllers
             {
                 return RedirectToAction("Index", "Products");
             }
-            var repositoryLogin = RepositoryLogin.ProccessingLogin(loginClass);
+            var repositoryLogin = RepositoryLogin.ProccessingLogin(loginClass,"Admin");
 
             if (!repositoryLogin.status)
             {
@@ -42,7 +42,7 @@ namespace CheqStore.Controllers
             }
             TempData["Message"] = "Logueo Correcto";
 
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Logout()

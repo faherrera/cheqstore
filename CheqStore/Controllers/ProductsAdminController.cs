@@ -74,8 +74,9 @@ namespace CheqStore.Controllers
                 return RedirectToAction("Index");
             }
 
-            TempData["Message"] = string.Format("Error al crear {0}, debe colocar correctamente los datos", product.Name);
+            ViewBag.Message = string.Format("Error al crear {0}, debe colocar correctamente los datos", product.Name);
 
+            ViewBag.CategoryID = ctx.Categories.ToList();
             return View(product);
         }
 

@@ -35,6 +35,8 @@ namespace CheqStore.Data.Repositories.Products
 
             product.PathPhoto = MultimediaRepository.uploadImage(File);
             product.CreatedAt = DateTime.Now;
+            product.Stock = product.Stock > 0 ? product.Stock : 0;
+            product.StatusLogic = product.Stock > 0 ? true : false;
             ctx.Products.Add(product);
             ctx.SaveChanges();
         }
@@ -57,7 +59,8 @@ namespace CheqStore.Data.Repositories.Products
             {
                 product.PathPhoto = MultimediaRepository.uploadImage(File);
             }
-
+            product.Stock = product.Stock > 0 ? product.Stock : 0;
+            product.StatusLogic = product.Stock > 0 ? true : false;
             ctx.Entry(product).State = EntityState.Modified;
             ctx.SaveChanges();
 
